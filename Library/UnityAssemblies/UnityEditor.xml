@@ -16877,12 +16877,12 @@ To force a reload of the mask, simply set  ModelImporterClipAnimation.maskSource
     </member>
     <member name="P:UnityEditor.PlayerSettings.PSVita.useLibLocation">
       <summary>
-        <para>Indicates that the application makes use of libLocation.</para>
+        <para>Support for the PS Vita location library was removed by SCE in SDK 3.570.</para>
       </summary>
     </member>
     <member name="P:UnityEditor.PlayerSettings.PSVita.AllowTwitterDialog">
       <summary>
-        <para>Allow Twitter Dialog.</para>
+        <para>Support for the PS Vita twitter dialog was removed by SCE in SDK 3.570.</para>
       </summary>
     </member>
     <member name="T:UnityEditor.PlayerSettings.PSVita.PSVitaAppCategory">
@@ -17943,6 +17943,13 @@ To force a reload of the mask, simply set  ModelImporterClipAnimation.maskSource
       <summary>
         <para>Called after prefab instances in the scene have been updated.</para>
       </summary>
+    </member>
+    <member name="M:UnityEditor.PrefabUtility.ConnectGameObjectToPrefab(UnityEngine.GameObject,UnityEngine.GameObject)">
+      <summary>
+        <para>Connects the source prefab to the game object.</para>
+      </summary>
+      <param name="go"></param>
+      <param name="sourcePrefab"></param>
     </member>
     <member name="M:UnityEditor.PrefabUtility.CreateEmptyPrefab(System.String)">
       <summary>
