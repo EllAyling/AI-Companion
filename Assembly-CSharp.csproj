@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemySight.cs" />
      <Compile Include="Assets\Scripts\Entity.cs" />
+     <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\AStar.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\Grid.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\Heap.cs" />

@@ -17,6 +17,11 @@ public class FollowState : ICompanionState {
     public void UpdateState()
     {
         CheckPosition();
+
+        if (companion.player.inCombat)
+        {
+            ToCombatState();
+        }
     }
 
     public void OnTriggerEnter(Collider other)
@@ -42,7 +47,10 @@ public class FollowState : ICompanionState {
 
     public void FromCombatState()
     {
-        companion.speed = 5;
+        companion.speed = 6;
+        companion.maximumDistance = 150.0f;
+        companion.playerRadiusX = 4.0f;
+        companion.playerRadiusY = 4.0f;
     }
 
     void CheckPosition()

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class StatePatternCompanion : Companion {
+public class StatePatternCompanion : MonoBehaviour {
 
     [HideInInspector] public ICompanionState currentState;
 
@@ -22,11 +22,11 @@ public class StatePatternCompanion : Companion {
     void Start()
     {
         currentState = followState;
+        currentState.FromCombatState();
     }
 
 	void Update ()
     {
-        if (Input.GetMouseButtonDown(0)) currentState.ToCombatState();
         currentState.UpdateState();
 	}
 

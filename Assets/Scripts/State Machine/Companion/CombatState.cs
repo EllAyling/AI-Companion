@@ -7,6 +7,9 @@ public class CombatState : ICompanionState {
     private readonly Companion companion;
     private readonly StatePatternCompanion stateMachine;
 
+    float coolDownTimer = 0.0f;
+    float coolDownThreshold = 5.0f;
+
 
     public CombatState(StatePatternCompanion statePatternCompanion)
     {
@@ -17,6 +20,7 @@ public class CombatState : ICompanionState {
     public void UpdateState()
     {
         CheckPosition();
+        CheckCoolDown();
     }
 
     public void OnTriggerEnter(Collider other)
@@ -27,6 +31,7 @@ public class CombatState : ICompanionState {
     public void ToFollowState()
     {
         stateMachine.currentState = stateMachine.followState;
+        stateMachine.currentState.FromCombatState();
     }
 
     public void FromFollowState()
@@ -56,6 +61,23 @@ public class CombatState : ICompanionState {
             int x = Random.Range(0, companion.candidatePositions.Count - 1);
             Vector3 targetPos = companion.candidatePositions[x];
             companion.RequestNewPath(targetPos);
+        }
+    }
+
+    void CheckCoolDown()
+    {
+        if (companion.player.inCombat)
+        {
+            coolDownTimer = 0.0f;
+            return;
+        }
+
+        coolDownTimer += Time.deltaTime;
+
+        if (coolDownTimer > coolDownThreshold)
+        {
+            coolDownTimer = 0.0f;
+            ToFollowState();
         }
     }
 

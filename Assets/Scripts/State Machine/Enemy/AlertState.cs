@@ -3,14 +3,17 @@ using System.Collections;
 
 public class AlertState : IEnemyState {
 
-    private readonly StatePatternEnemy enemy;
+    private readonly StatePatternEnemy stateMachine;
+    private readonly Enemy enemy;
 
     private float searchTime;
     bool cameFromChase = false;
 
     public AlertState(StatePatternEnemy statePatternEnemy)
     {
-        enemy = statePatternEnemy;
+        stateMachine = statePatternEnemy;
+        enemy = statePatternEnemy.enemy;
+        
     }
 
     public void UpdateState()
@@ -27,10 +30,10 @@ public class AlertState : IEnemyState {
     public void ToPatrolState()
     {
         searchTime = 0;
-        enemy.currentState = enemy.patrolState;
+        stateMachine.currentState = stateMachine.patrolState;
 
-        if (!cameFromChase) enemy.currentState.FromAlertState();
-        else enemy.currentState.FromChaseState();
+        if (!cameFromChase) stateMachine.currentState.FromAlertState();
+        else stateMachine.currentState.FromChaseState();
 
         Debug.Log("Came from chase " + cameFromChase);
 
@@ -53,8 +56,8 @@ public class AlertState : IEnemyState {
 
     public void ToChaseState()
     {
-        enemy.currentState = enemy.chaseState;
-        enemy.currentState.FromAlertState();
+        stateMachine.currentState = stateMachine.chaseState;
+        stateMachine.currentState.FromAlertState();
         searchTime = 0;
     }
 

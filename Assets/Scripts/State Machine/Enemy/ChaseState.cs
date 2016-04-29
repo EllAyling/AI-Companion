@@ -3,11 +3,13 @@ using System.Collections;
 
 public class ChaseState : IEnemyState {
 
-    private readonly StatePatternEnemy enemy;
+    private readonly StatePatternEnemy stateMachine;
+    private readonly Enemy enemy;
 
     public ChaseState(StatePatternEnemy statePatternEnemy)
     {
-        enemy = statePatternEnemy;
+        stateMachine = statePatternEnemy;
+        enemy = statePatternEnemy.enemy;
     }
 
     public void UpdateState()
@@ -32,8 +34,8 @@ public class ChaseState : IEnemyState {
 
     public void ToAlertState()
     {
-        enemy.currentState = enemy.alertState;
-        enemy.currentState.FromChaseState();
+        stateMachine.currentState = stateMachine.alertState;
+        stateMachine.currentState.FromChaseState();
     }
 
     public void FromAlertState()

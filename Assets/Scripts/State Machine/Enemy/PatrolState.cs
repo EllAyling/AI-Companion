@@ -3,14 +3,17 @@ using System.Collections;
 
 public class PatrolState : IEnemyState {
 
-    private readonly StatePatternEnemy enemy;
+    private readonly StatePatternEnemy stateMachine;
+    private readonly Enemy enemy;
+
     private int nextWayPoint;
     private bool wayPointReached;
     private bool findNearestWaypoint;
 
     public PatrolState(StatePatternEnemy statePatternEnemy)
     {
-        enemy = statePatternEnemy;       
+        stateMachine = statePatternEnemy;
+        enemy = statePatternEnemy.enemy;
     }
 
     public void UpdateState()
@@ -40,8 +43,8 @@ public class PatrolState : IEnemyState {
 
     public void ToAlertState()
     {
-        enemy.currentState = enemy.alertState;
-        enemy.currentState.FromPatrolState();
+        stateMachine.currentState = stateMachine.alertState;
+        stateMachine.currentState.FromPatrolState();
     }
 
     public void FromAlertState()
@@ -51,8 +54,8 @@ public class PatrolState : IEnemyState {
 
     public void ToChaseState()
     {
-        enemy.currentState = enemy.chaseState;
-        enemy.currentState.FromPatrolState();
+        stateMachine.currentState = stateMachine.chaseState;
+        stateMachine.currentState.FromPatrolState();
     }
 
     public void FromChaseState()

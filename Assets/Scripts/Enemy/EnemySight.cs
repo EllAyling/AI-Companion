@@ -17,6 +17,7 @@ public class EnemySight : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag(Tags.player);
         col = GetComponent<SphereCollider>();
         spottedPlayerPosition = Vector3.zero;
+        playerInSight = false;
     }
 
     void Update()
