@@ -24,7 +24,7 @@ public class Entity : MonoBehaviour {
     public bool isOnPath;
 
     int targetIndex;
-    protected float speed = 2;
+    public float speed = 2;
 
     GameObject WayPoints;
 
@@ -112,6 +112,7 @@ public class Entity : MonoBehaviour {
             }
         }
     }
+
 
     public void OnDrawGizmos()
     {

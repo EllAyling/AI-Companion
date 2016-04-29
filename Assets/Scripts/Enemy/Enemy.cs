@@ -8,7 +8,7 @@ public class Enemy : Entity {
         EntityType type = EntityType.Enemy | EntityType.Normal;
         AddType(type);
         speed = 2;
-}
+    }
 
     void Update()
     {
