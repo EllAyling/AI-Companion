@@ -7,8 +7,8 @@ public enum EntityType
     Player = 1 << 0,
     Companion = 1 << 1,
     Enemy = 1 << 2,
-    Normal = 1 << 3,
-    Range = 1 << 4,
+    PatrolEnemy = 1 << 3,
+    MeleeEnemy = 1 << 4,
 }
 
 public class Entity : MonoBehaviour {
@@ -22,6 +22,9 @@ public class Entity : MonoBehaviour {
     protected float pathRequestRefresh = 0.8f;
     bool pathRequested;
     public bool isOnPath;
+
+    public Vector3 moveTarget;
+    public Vector3 attackTarget;
 
     int targetIndex;
     public float speed = 2;

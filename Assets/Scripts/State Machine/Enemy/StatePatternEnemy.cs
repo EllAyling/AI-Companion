@@ -4,7 +4,7 @@ using System.Collections;
 public class StatePatternEnemy : MonoBehaviour {
 
     [HideInInspector] public IEnemyState currentState;
-    [HideInInspector] public Enemy enemy;
+    [HideInInspector] public EnemySM enemy;
 
     [HideInInspector] public ChaseState chaseState;
     [HideInInspector] public AlertState alertState;
@@ -13,7 +13,7 @@ public class StatePatternEnemy : MonoBehaviour {
     // Use this for initialization
     void Awake ()
     {
-        enemy = GetComponent<Enemy>();
+        enemy = GetComponent<EnemySM>();
 
         chaseState = new ChaseState(this);
         alertState = new AlertState(this);

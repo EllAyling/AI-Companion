@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : Entity {
+public class EnemySM : Entity {
 
     public EnemySight eyes;
 
@@ -14,7 +14,7 @@ public class Enemy : Entity {
     [HideInInspector] public StatePatternEnemy statemachine;
     // Use this for initialization
     void Start () {
-        EntityType type = EntityType.Enemy | EntityType.Normal;
+        EntityType type = EntityType.Enemy;
         AddType(type);
         speed = 2;
 

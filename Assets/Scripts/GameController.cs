@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
     Canvas mainCanvas;
     Player player;
 
-    public Enemy[] enemies;
+    public EnemySM[] enemies;
 
     void Awake()
     {
@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour {
 
     void Start()
     {
-        enemies = FindObjectsOfType(typeof(Enemy)) as Enemy[];
+        enemies = FindObjectsOfType(typeof(EnemySM)) as EnemySM[];
     }
 
     void Update()

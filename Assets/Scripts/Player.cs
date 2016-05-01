@@ -28,7 +28,7 @@ public class Player : Entity
     {
         if (GameController.gameController.enemies.Length > 0)
         {
-            foreach (Enemy enemy in GameController.gameController.enemies)
+            foreach (EnemySM enemy in GameController.gameController.enemies)
             {
                 if (enemy.statemachine.currentState == enemy.statemachine.chaseState)
                 {

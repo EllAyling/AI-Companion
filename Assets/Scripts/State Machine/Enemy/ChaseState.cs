@@ -4,7 +4,7 @@ using System.Collections;
 public class ChaseState : IEnemyState {
 
     private readonly StatePatternEnemy stateMachine;
-    private readonly Enemy enemy;
+    private readonly EnemySM enemy;
 
     public ChaseState(StatePatternEnemy statePatternEnemy)
     {

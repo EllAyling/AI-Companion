@@ -4,7 +4,7 @@ using System.Collections;
 public class AlertState : IEnemyState {
 
     private readonly StatePatternEnemy stateMachine;
-    private readonly Enemy enemy;
+    private readonly EnemySM enemy;
 
     private float searchTime;
     bool cameFromChase = false;

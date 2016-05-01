@@ -4,7 +4,7 @@ using System.Collections;
 public class PatrolState : IEnemyState {
 
     private readonly StatePatternEnemy stateMachine;
-    private readonly Enemy enemy;
+    private readonly EnemySM enemy;
 
     private int nextWayPoint;
     private bool wayPointReached;
