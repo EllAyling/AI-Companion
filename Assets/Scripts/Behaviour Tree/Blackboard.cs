@@ -19,6 +19,13 @@ public class Blackboard{
 
     public void SetValue<T>(string key, T value)
     {
-        treeData[key] = value;
+        if (treeData.ContainsKey(key))
+        {
+            treeData[key] = value;
+        }
+        else
+        {
+            treeData.Add(key, value);
+        }
     }
 }

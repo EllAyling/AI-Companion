@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using System;
 
-public class ActionMoveTo : BTNode {
+public class ActionStopMovement : BTNode {
 
     private Entity entity;
-    private Transform target;
 
     public override void Init(Blackboard blackboard)
     {
@@ -16,8 +14,9 @@ public class ActionMoveTo : BTNode {
 
     public override NodeState Tick()
     {
-        target = blackboard.GetValueFromKey<Transform>("target");
-        entity.RequestNewPath(target);
+        entity.StopPath();
+        blackboard.SetValue("target", Vector3.zero);
         return NodeState.SUCCESS;
     }
+
 }

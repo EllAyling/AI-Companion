@@ -2,11 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class NodeSequencer : BTCompositor {
+public class NodeSequencer : BTCompositor {
+
+    int nodeRunning;
+
+    public NodeSequencer(BTNode[] children)
+    {
+        this.children = children;
+    }
 
     public override NodeState Tick()
     {
-        foreach (BTNode child in children)
+        foreach(BTNode child in children)
         {
             state = child.Tick();
 

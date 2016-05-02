@@ -18,10 +18,10 @@ public class FollowState : ICompanionState {
     {
         CheckPosition();
 
-        if (companion.player.inCombat)
-        {
-            ToCombatState();
-        }
+        //if (companion.player.inCombat)
+       // {
+       //     ToCombatState();
+       // }
     }
 
     public void OnTriggerEnter(Collider other)

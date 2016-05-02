@@ -13,13 +13,13 @@ public class AIBrain {
 
     public BTNode root;
     protected Blackboard blackboard;
-
-    public Enemy enemy;
+    private List<BTNode> treeNodes;
 
     public AIBrain(BTNode root, Blackboard blackboard)
     {
         this.root = root;
         this.blackboard = blackboard;
+        blackboard.SetValue<List<BTNode>>("treeNodes", treeNodes);
     }
 
     public void Start()
@@ -28,8 +28,8 @@ public class AIBrain {
     }
 	
 	// Update is called once per frame
-	public void Update () {
-
+	public void Update ()
+    {
         root.Tick();
 	}
 }

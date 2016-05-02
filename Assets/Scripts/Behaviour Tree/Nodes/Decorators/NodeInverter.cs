@@ -12,7 +12,6 @@ public class NodeInverter : BTDecorator {
     public override NodeState Tick()
     {
         state = child.Tick();
-
         if (state == NodeState.SUCCESS)
         {
             state = NodeState.FAILURE;
@@ -21,7 +20,6 @@ public class NodeInverter : BTDecorator {
         {
             state = NodeState.SUCCESS;
         }
-
         return state;
     }
 

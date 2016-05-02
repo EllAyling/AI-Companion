@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System;
 
 public class SequencePatrol : NodeSequencer {
-
-    public SequencePatrol()
+    public SequencePatrol(BTNode[] children) : base(children)
     {
         children = new BTNode[]
         {
             new ActionReachedTarget(),
             new ActionGetNextWaypoint(),
-            new ActionMoveTo()
+            new ActionRequestPathToTarget()
         };
     }
 }

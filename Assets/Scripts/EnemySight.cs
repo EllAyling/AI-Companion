@@ -5,7 +5,7 @@ public class EnemySight : MonoBehaviour {
 
     public float fieldOfViewAngle = 110.0f;
     public bool playerInSight;
-    public Vector3 spottedPlayerPosition;
+    public Transform spottedPlayerPosition;
 
     public LayerMask collisionMask;
 
@@ -16,7 +16,6 @@ public class EnemySight : MonoBehaviour {
     {
         player = GameObject.FindGameObjectWithTag(Tags.player);
         col = GetComponent<SphereCollider>();
-        spottedPlayerPosition = Vector3.zero;
         playerInSight = false;
     }
 
@@ -42,7 +41,7 @@ public class EnemySight : MonoBehaviour {
                     if (hit.collider.gameObject == player)
                     {
                         playerInSight = true;
-                        spottedPlayerPosition = player.transform.position;
+                        spottedPlayerPosition = player.transform;
                     }
                 }
             }

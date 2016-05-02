@@ -66,6 +66,7 @@ public class CombatState : ICompanionState {
 
     void CheckCoolDown()
     {
+        /*
         if (companion.player.inCombat)
         {
             coolDownTimer = 0.0f;
@@ -79,6 +80,7 @@ public class CombatState : ICompanionState {
             coolDownTimer = 0.0f;
             ToFollowState();
         }
+        */
     }
 
 }

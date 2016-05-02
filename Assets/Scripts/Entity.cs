@@ -11,12 +11,16 @@ public enum EntityType
     MeleeEnemy = 1 << 4,
 }
 
-public class Entity : MonoBehaviour {
+public class Entity : MonoBehaviour, IDamagable {
 
     public Grid grid;
 
-    public int health;
+    bool dead;
+
+    public float startingHealth = 10f;
+    protected float health;
     public int type = 0;
+    public bool enemyNearby = false;
 
     Vector3[] path;
     protected float pathRequestRefresh = 0.8f;
@@ -32,11 +36,15 @@ public class Entity : MonoBehaviour {
     GameObject WayPoints;
 
     // Use this for initialization
-    void Start () {
+    public virtual void Start () {
         AddType(EntityType.Entity);
+
+        dead = false;
 
         pathRequested = false;
         isOnPath = false;
+
+        health = startingHealth;
 
         grid = GameObject.Find("GameController").GetComponent<Grid>();
     }
@@ -56,7 +64,7 @@ public class Entity : MonoBehaviour {
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
-        if (pathSuccessful)
+        if (pathSuccessful && !dead)
         {
             StopPath();
             path = newPath;
@@ -66,27 +74,29 @@ public class Entity : MonoBehaviour {
 
     public void RequestNewPath(Transform _target)
     {
-        if (!pathRequested)
+        if (!pathRequested && !dead)
             StartRequest(_target.position);
     }
 
     public void RequestNewPath(Vector3 _target)
     {
-        if (!pathRequested)
+        if (!pathRequested && !dead)
             StartRequest(_target);
     }
 
     public void StopPath()
     {
-        StopCoroutine("FollowPath");
-        path = null;
-        isOnPath = false;
+        if (!dead)
+        {
+            StopCoroutine("FollowPath");
+            path = null;
+            isOnPath = false;
+        }
     }
 
     void StartRequest(Vector3 _target)
     {
         pathRequested = true;
-        Debug.Log("Path Request");
         PathfindingManager.RequestPath(transform.position, _target, OnPathFound);
         pathRequested = false;
     }
@@ -116,6 +126,22 @@ public class Entity : MonoBehaviour {
         }
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            enemyNearby = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            enemyNearby = false;
+        }
+    }
+
 
     public void OnDrawGizmos()
     {
@@ -136,6 +162,16 @@ public class Entity : MonoBehaviour {
                     Gizmos.DrawLine(path[i - 1], path[i]);
                 }
             }
+        }
+    }
+
+    public void TakeHit(float damage, RaycastHit hit)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            dead = true;
+            Destroy(gameObject);
         }
     }
 }

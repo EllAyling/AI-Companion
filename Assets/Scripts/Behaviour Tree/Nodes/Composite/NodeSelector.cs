@@ -3,6 +3,8 @@ using System.Collections;
 
 public class NodeSelector : BTCompositor {
 
+    int nodeRunning;
+
     public NodeSelector(BTNode[] children)
     {
         this.children = children;
@@ -10,7 +12,7 @@ public class NodeSelector : BTCompositor {
 
     public override NodeState Tick()
     {
-        foreach (BTNode child in children)
+        foreach(BTNode child in children)
         {
             state = child.Tick();
 
@@ -20,6 +22,6 @@ public class NodeSelector : BTCompositor {
             }
         }
 
-        return state;
+        return NodeState.FAILURE;
     }
 }

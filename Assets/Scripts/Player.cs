@@ -3,40 +3,72 @@ using System.Collections;
 
 public class Player : Entity
 {
-
-    public bool inCombat;
     public UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController playerControls;
+    GunController gunController;
 
     // Use this for initialization
-    void Start () {
+    public override void Start () {
+        base.Start();
         EntityType type = EntityType.Player;
         AddType(type);
 
         playerControls = GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>();
+        gunController = GetComponent<GunController>();
 
-        inCombat = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        CheckEnemyStates();
+        if (Input.GetMouseButtonDown(0))
+        {
+            gunController.Shoot();
+        }
+        float mouseWheelDir = Input.GetAxis("Mouse ScrollWheel");
+        if(mouseWheelDir != 0.0f)
+        {
+            ChangeWeapon(mouseWheelDir);
+        }
 
     }
 
-    void CheckEnemyStates()
+    void ChangeWeapon(float mouseWheelDir)
     {
-        if (GameController.gameController.enemies.Length > 0)
+        if (mouseWheelDir > 0.0f)
         {
-            foreach (EnemySM enemy in GameController.gameController.enemies)
+            for (int i = 0; i < gunController.allGuns.Length; i++)
             {
-                if (enemy.statemachine.currentState == enemy.statemachine.chaseState)
+                if (gunController.allGuns[i].type == gunController.equippedGun.type)
                 {
-                    inCombat = true;
+                    if (i != gunController.allGuns.Length - 1)
+                    {
+                        gunController.EquipGun(gunController.allGuns[i + 1]);
+                        break;
+                    }
+                    else
+                    {
+                        gunController.EquipGun(gunController.allGuns[0]);
+                        break;
+                    }
                 }
-                else
+            }
+        }
+        else
+        {
+            for (int i = 0; i < gunController.allGuns.Length; i++)
+            {
+                if (gunController.allGuns[i].type == gunController.equippedGun.type)
                 {
-                    inCombat = false;
+                    if (i == 0)
+                    {
+                        gunController.EquipGun(gunController.allGuns[gunController.allGuns.Length - 1]);
+                        break;
+                    }
+                    else
+                    {
+                        gunController.EquipGun(gunController.allGuns[i - 1]);
+                        break;
+                    }
                 }
             }
         }

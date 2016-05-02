@@ -67,6 +67,7 @@ public class ChaseState : IEnemyState {
 
     private void Chase()
     {
+        /*
         enemy.meshRendererFlag.material.color = Color.red;
         if (enemy.chaseTarget != enemy.eyes.spottedPlayerPosition)
         {
@@ -77,5 +78,6 @@ public class ChaseState : IEnemyState {
             }
                 enemy.transform.LookAt(enemy.chaseTarget);
         }
+        */
     }
 }
