@@ -21,17 +21,19 @@ public class Entity : MonoBehaviour, IDamagable {
     protected float health;
     public int type = 0;
     public bool enemyNearby = false;
+    public bool getSearchPosition = false;
+    public bool searchingForEnemy = false;
 
     Vector3[] path;
     protected float pathRequestRefresh = 0.8f;
     bool pathRequested;
     public bool isOnPath;
-
+    
     public Vector3 moveTarget;
     public Vector3 attackTarget;
 
     int targetIndex;
-    public float speed = 2;
+    public float speed;
 
     GameObject WayPoints;
 
@@ -120,7 +122,10 @@ public class Entity : MonoBehaviour, IDamagable {
                     }
                     currentWaypoint = path[targetIndex];
                 }
-                transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+                Node nodeWalkingOn = grid.NodeFromWorldPoint(transform.position);
+                float walkingSpeed = speed - nodeWalkingOn.movementPenalty;
+                if (walkingSpeed <= 0.0) speed = 0.1f;
+                transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, walkingSpeed * Time.deltaTime);
                 yield return null;
             }
         }

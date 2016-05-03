@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 public class ActionGetAttackPosition : BTNode {
 
-    private Entity entity;
     private Transform target;
     private Vector3 attackPosition;
-    private float minimumDistance = 2.0f;
 
     public Vector3 lastTargetPos;
 
@@ -21,7 +19,6 @@ public class ActionGetAttackPosition : BTNode {
     public override void Init(Blackboard blackboard)
     {
         this.blackboard = blackboard;
-        entity = blackboard.GetValueFromKey<Entity>("entity");
         lastTargetPos = Vector3.zero;
 
         candidatePositions = new List<Vector3>();

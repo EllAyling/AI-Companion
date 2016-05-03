@@ -13,13 +13,11 @@ public class AIBrain {
 
     public BTNode root;
     protected Blackboard blackboard;
-    private List<BTNode> treeNodes;
 
     public AIBrain(BTNode root, Blackboard blackboard)
     {
         this.root = root;
         this.blackboard = blackboard;
-        blackboard.SetValue<List<BTNode>>("treeNodes", treeNodes);
     }
 
     public void Start()

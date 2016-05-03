@@ -15,8 +15,9 @@ public class Companion : Entity
     public float playerRadiusX;
     public float playerRadiusY;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
         EntityType type = EntityType.Companion;
         AddType(type);
 

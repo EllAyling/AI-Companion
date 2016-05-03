@@ -19,6 +19,7 @@ public class ActionGetNextWaypoint : BTNode {
 
     public override NodeState Tick()
     {
+        entity.searchingForEnemy = false;
         nextWaypointIndex = (nextWaypointIndex + 1) % waypoints.Length;
         nextWaypoint = waypoints[nextWaypointIndex].position;
         entity.transform.LookAt(waypoints[nextWaypointIndex]);

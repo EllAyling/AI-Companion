@@ -19,6 +19,7 @@ public class ActionCheckForEnemiesInSight : BTNode {
         {
             blackboard.SetValue("spottedPlayerPosition", eyes.spottedPlayerPosition);
             entity.transform.LookAt(eyes.spottedPlayerPosition.position);
+            entity.getSearchPosition = true;
             return NodeState.SUCCESS;
         }
         else return NodeState.FAILURE;

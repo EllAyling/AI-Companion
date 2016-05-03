@@ -7,8 +7,8 @@ public class CombatState : ICompanionState {
     private readonly Companion companion;
     private readonly StatePatternCompanion stateMachine;
 
-    float coolDownTimer = 0.0f;
-    float coolDownThreshold = 5.0f;
+    //float coolDownTimer = 0.0f;
+    //float coolDownThreshold = 5.0f;
 
 
     public CombatState(StatePatternCompanion statePatternCompanion)

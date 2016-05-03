@@ -19,8 +19,6 @@ public class EnemyPatrol : Entity {
         EntityType type = EntityType.Enemy | EntityType.PatrolEnemy;
         AddType(type);
 
-        speed = 2.0f;
-
         eyes = GetComponentInChildren<EnemySight>();
         enemyNearby = false;
         blackboard = new Blackboard();
@@ -30,32 +28,43 @@ public class EnemyPatrol : Entity {
             {
                 new NodeSelector(new BTNode[]
                 {
-                        new NodeSelector(new BTNode[]
-                        {
+                    new NodeSelector(new BTNode[]
+                    {
+
                             new ActionCheckForEnemiesInSight(),
                             new NodeSequencer(new BTNode[]
                             {
-                                new ActionCheckForEnemiesNearby(),
-                                new ActionStopMovement()
-                            })
-                        }),
-                    new NodeSequencer(new BTNode[]
-                    {
+                                new ActionGetLastSightedSearchPosition(),
+                                new ActionRequestPathToTarget()
+                            }),
+
                         new NodeSequencer(new BTNode[]
                         {
-                            new ActionReachedTarget(),
-                            new ActionGetNextWaypoint()
+                            new ActionSearchingForEnemyBool(),
+                            new NodeInverter(
+                                new ActionReachedTarget()
+                                )
                         }),
+                        new NodeSequencer(new BTNode[]
+                        {
+                            new ActionCheckForEnemiesNearby(),
+                            new ActionStopMovement()
+                        })
+                    }),
+                    new NodeSequencer(new BTNode[]
+                    {
+                        new ActionReachedTarget(),
+                        new ActionGetNextWaypoint(),
                         new NodeAlwaysFail(
                             new ActionRequestPathToTarget()
-                        )
+                            )
                     })
                 }),
                 new NodeSelector(new BTNode[]
                 {
                     new ActionCheckForEnemiesInSight(),
                     new NodeAlwaysFail(
-                        new ActionLookForHeardEnemy()
+                        new ActionLookForEnemy()
                     )
 
                 }),
@@ -72,8 +81,6 @@ public class EnemyPatrol : Entity {
                             new ActionUseWeapon(),
                             new ActionReachedTarget()
                         }),
-                        new NodeSequencer(new BTNode[]
-                        {
                             new NodeAlwaysSuccess(
                                 new NodeSequencer(new BTNode[]
                                 {
@@ -83,7 +90,6 @@ public class EnemyPatrol : Entity {
                                     new ActionGetAttackPosition(),
                                     new ActionRequestPathToTarget()
                                 })),
-                        })
                     }),
                     new ActionRequestPathToTarget()
                 })

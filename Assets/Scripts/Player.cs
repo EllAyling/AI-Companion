@@ -5,6 +5,7 @@ public class Player : Entity
 {
     public UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController playerControls;
     GunController gunController;
+    float defaultSpeed;
 
     // Use this for initialization
     public override void Start () {
@@ -14,6 +15,8 @@ public class Player : Entity
 
         playerControls = GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>();
         gunController = GetComponent<GunController>();
+
+        defaultSpeed = playerControls.movementSettings.ForwardSpeed;
 
     }
 	
@@ -29,6 +32,10 @@ public class Player : Entity
         {
             ChangeWeapon(mouseWheelDir);
         }
+
+        Node nodeWalkingOn = grid.NodeFromWorldPoint(transform.position);
+        float speed = defaultSpeed - nodeWalkingOn.movementPenalty;
+        playerControls.movementSettings.ForwardSpeed = speed;
 
     }
 

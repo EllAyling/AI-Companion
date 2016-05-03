@@ -13,7 +13,8 @@ public class EnemySM : Entity {
     [HideInInspector] public Vector3 chaseTarget;
     [HideInInspector] public StatePatternEnemy statemachine;
     // Use this for initialization
-    void Start () {
+    public override void Start () {
+        base.Start();
         EntityType type = EntityType.Enemy;
         AddType(type);
         speed = 2;
