@@ -69,10 +69,12 @@ public class AlertState : IEnemyState {
 
     private void Look()
     {
+        /*
         if (enemy.eyes.playerInSight)
         {
             ToChaseState();
         }
+        */
     }
 
     private void Search()

@@ -8,4 +8,5 @@ public class Tags : MonoBehaviour
     public const string gameController = "GameController";
     public const string enemy = "Enemy";
     public const string waypoint = "Waypoint";
+    public const string companion = "Companion";
 }

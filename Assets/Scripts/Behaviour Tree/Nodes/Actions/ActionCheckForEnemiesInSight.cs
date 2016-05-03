@@ -15,10 +15,10 @@ public class ActionCheckForEnemiesInSight : BTNode {
 
     public override NodeState Tick()
     {
-        if (eyes.playerInSight)
+        if (eyes.enemiesInSight.Count > 0)
         {
-            blackboard.SetValue("spottedPlayerPosition", eyes.spottedPlayerPosition);
-            entity.transform.LookAt(eyes.spottedPlayerPosition.position);
+            blackboard.SetValue("spottedPlayerPosition", eyes.spottedEnemyPosition);
+            entity.transform.LookAt(eyes.spottedEnemyPosition.position);
             entity.getSearchPosition = true;
             return NodeState.SUCCESS;
         }

@@ -6,7 +6,7 @@ public class ActionFindNearestWaypoint : BTNode {
     private Transform[] waypoints;
     private Entity entity;
     private int nextWaypointIndex;
-    private Transform nextWaypoint;
+    private Vector3 nextWaypoint;
 
     public override void Init(Blackboard blackboard)
     {
@@ -27,8 +27,12 @@ public class ActionFindNearestWaypoint : BTNode {
                 nextWaypointIndex = i;
             }
         }
+        entity.searchingForEnemy = false;
+        nextWaypoint = waypoints[nextWaypointIndex].position;
+        entity.transform.LookAt(waypoints[nextWaypointIndex]);
+        blackboard.SetValue<Vector3>("target", nextWaypoint);
 
-        blackboard.SetValue<Transform>("target", waypoints[nextWaypointIndex]);
+        Debug.Log("Finding nearest waypoint");
 
         return NodeState.SUCCESS;
     }

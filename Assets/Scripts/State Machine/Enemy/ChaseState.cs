@@ -55,6 +55,7 @@ public class ChaseState : IEnemyState {
 
     private void Look()
     {
+        /*
         if (enemy.eyes.playerInSight)
         {
             Chase();
@@ -63,6 +64,7 @@ public class ChaseState : IEnemyState {
         {
             ToAlertState();
         }
+        */
     }
 
     private void Chase()

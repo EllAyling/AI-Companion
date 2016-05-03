@@ -23,6 +23,10 @@ public class EnemyGuard : Entity {
         blackboard = new Blackboard();
         gunController = GetComponent<GunController>();
 
+        blackboard.treeData.Add("entity", this);
+        blackboard.treeData.Add("eyes", eyes);
+        blackboard.treeData.Add("gunController", gunController);
+
         NodeSequencer root = new NodeSequencer(new BTNode[]
             {
                 new NodeSelector(new BTNode[]
@@ -35,9 +39,6 @@ public class EnemyGuard : Entity {
                 new ActionUseWeapon()
            });
         
-        blackboard.treeData.Add("entity", this);
-        blackboard.treeData.Add("eyes", eyes);
-        blackboard.treeData.Add("gunController", gunController);
 
         brain = new AIBrain(root, blackboard);
 

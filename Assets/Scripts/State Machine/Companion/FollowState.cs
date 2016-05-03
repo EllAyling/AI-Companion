@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class FollowState : ICompanionState {
 
-    private readonly Companion companion;
+    private readonly CompanionSM companion;
     private readonly StatePatternCompanion stateMachine;
 
 

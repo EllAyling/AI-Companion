@@ -16,6 +16,7 @@ public class EnemyPatrol : Entity {
     public override void Start () {
 
         base.Start();
+
         EntityType type = EntityType.Enemy | EntityType.PatrolEnemy;
         AddType(type);
 
@@ -24,26 +25,46 @@ public class EnemyPatrol : Entity {
         blackboard = new Blackboard();
         gunController = GetComponent<GunController>();
 
+        blackboard.treeData.Add("patrolRoute", patrolRoute);
+        blackboard.treeData.Add("entity", this);
+        blackboard.treeData.Add("eyes", eyes);
+        blackboard.treeData.Add("gunController", gunController);
+
         NodeSequencer root = new NodeSequencer(new BTNode[]
             {
                 new NodeSelector(new BTNode[]
                 {
                     new NodeSelector(new BTNode[]
                     {
-
-                            new ActionCheckForEnemiesInSight(),
+                        new ActionCheckForEnemiesInSight(),
+                        new NodeAlwaysFail(
                             new NodeSequencer(new BTNode[]
                             {
-                                new ActionGetLastSightedSearchPosition(),
+                                new ActionCheckHitLocation(),
                                 new ActionRequestPathToTarget()
-                            }),
-
+                            })
+                            ),
+                        new NodeSequencer(new BTNode[]
+                        {
+                            new ActionGetLastSightedSearchPosition(),
+                            new ActionRequestPathToTarget()
+                        }),
                         new NodeSequencer(new BTNode[]
                         {
                             new ActionSearchingForEnemyBool(),
-                            new NodeInverter(
-                                new ActionReachedTarget()
+                            new NodeSelector(new BTNode[]
+                            {
+                                new NodeInverter(
+                                    new ActionReachedTarget()
+                                    ),
+                                new NodeAlwaysFail(
+                                    new NodeSequencer(new BTNode[]
+                                    {
+                                        new ActionFindNearestWaypoint(),
+                                        new ActionRequestPathToTarget()
+                                    })
                                 )
+                            })
                         }),
                         new NodeSequencer(new BTNode[]
                         {
@@ -94,16 +115,8 @@ public class EnemyPatrol : Entity {
                     new ActionRequestPathToTarget()
                 })
             });
-        
-            
-
-        blackboard.treeData.Add("patrolRoute", patrolRoute);
-        blackboard.treeData.Add("entity", this);
-        blackboard.treeData.Add("eyes", eyes);
-        blackboard.treeData.Add("gunController", gunController);
 
         brain = new AIBrain(root, blackboard);
-
         brain.Start();
     }
 

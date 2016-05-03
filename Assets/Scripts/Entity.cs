@@ -28,9 +28,8 @@ public class Entity : MonoBehaviour, IDamagable {
     protected float pathRequestRefresh = 0.8f;
     bool pathRequested;
     public bool isOnPath;
-    
-    public Vector3 moveTarget;
-    public Vector3 attackTarget;
+
+    public Vector3 directionOfHit = Vector3.zero;
 
     int targetIndex;
     public float speed;
@@ -133,7 +132,7 @@ public class Entity : MonoBehaviour, IDamagable {
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Companion"))
         {
             enemyNearby = true;
         }
@@ -141,7 +140,7 @@ public class Entity : MonoBehaviour, IDamagable {
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Companion"))
         {
             enemyNearby = false;
         }
@@ -172,6 +171,7 @@ public class Entity : MonoBehaviour, IDamagable {
 
     public void TakeHit(float damage, RaycastHit hit)
     {
+        directionOfHit = transform.position + hit.normal;
         health -= damage;
         if (health <= 0)
         {

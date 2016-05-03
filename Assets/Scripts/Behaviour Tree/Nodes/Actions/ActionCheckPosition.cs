@@ -15,7 +15,7 @@ public class ActionCheckPosition : BTNode {
 
     public override NodeState Tick()
     {
-        float distance = Vector3.Distance(entity.transform.position, eyes.spottedPlayerPosition.position);
+        float distance = Vector3.Distance(entity.transform.position, eyes.spottedEnemyPosition.position);
         if (distance < 4.0f)
         {
             return NodeState.FAILURE;

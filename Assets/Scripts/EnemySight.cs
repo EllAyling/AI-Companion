@@ -1,35 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemySight : MonoBehaviour {
 
     public float fieldOfViewAngle = 110.0f;
-    public bool playerInSight;
-    public Transform spottedPlayerPosition;
-
-    public LayerMask collisionMask;
+    public List<GameObject> enemiesInSight;
+    public Transform spottedEnemyPosition;
 
     private SphereCollider col;
     private GameObject player;
+    private GameObject companion;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag(Tags.player);
+        companion = GameObject.FindGameObjectWithTag(Tags.companion);
         col = GetComponent<SphereCollider>();
-        playerInSight = false;
+        enemiesInSight = new List<GameObject>();
     }
 
     void Update()
-    {       
-        
+    {
+        if (enemiesInSight.Count > 0)
+        {
+            GameObject target = TargetToPrioritise();
+            spottedEnemyPosition = target.transform;
+        }
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject == player)
+        if (other.gameObject == player || other.gameObject == companion)
         {
-            playerInSight = false;
-
+            enemiesInSight.Remove(other.gameObject);
             Vector3 direction = other.transform.position - transform.position;
             float angle = Vector3.Angle(direction, transform.forward);
 
@@ -38,21 +42,44 @@ public class EnemySight : MonoBehaviour {
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, direction.normalized, out hit, col.radius))
                 {
-                    if (hit.collider.gameObject == player)
+                    if (hit.collider.gameObject == other.gameObject)
                     {
-                        playerInSight = true;
-                        spottedPlayerPosition = player.transform;
+                        enemiesInSight.Add(hit.collider.gameObject);
                     }
-                }
+                }      
             }
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == player)
+        if (other.gameObject == player || other.gameObject == companion)
         {
-            playerInSight = false;
+            enemiesInSight.Remove(other.gameObject);
         }
+    }
+
+    GameObject TargetToPrioritise()
+    {
+        GameObject closestEnemy = enemiesInSight[0];
+
+        foreach (GameObject enemy in enemiesInSight) //If any of them are the player, dont even bother checking distance. Target player.
+        {
+            if (enemy.gameObject == player)
+            {
+                return enemy.gameObject;
+            }
+        }
+
+        foreach (GameObject enemy in enemiesInSight) //Otherwise get the closest enemy.
+        {
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distance < Vector3.Distance(transform.position, closestEnemy.transform.position))
+            {
+                closestEnemy = enemy;
+            }
+        }
+        return closestEnemy;
+        
     }
 }

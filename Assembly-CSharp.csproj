@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Behaviour Tree\Blackboard.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionCheckForEnemiesInSight.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionCheckForEnemiesNearby.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionCheckHitLocation.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionCheckPosition.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionDebug.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionFindNearestWaypoint.cs" />
@@ -70,6 +71,7 @@
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Decorators\NodeInverter.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Decorators\NodeUntilFail.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Sequences\SequencePatrol.cs" />
+     <Compile Include="Assets\Scripts\Companion.cs" />
      <Compile Include="Assets\Scripts\EnemyGuard.cs" />
      <Compile Include="Assets\Scripts\EnemyPatrol.cs" />
      <Compile Include="Assets\Scripts\EnemySight.cs" />
@@ -86,7 +88,7 @@
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\State Machine\Companion\CombatState.cs" />
-     <Compile Include="Assets\Scripts\State Machine\Companion\Companion.cs" />
+     <Compile Include="Assets\Scripts\State Machine\Companion\CompanionSM.cs" />
      <Compile Include="Assets\Scripts\State Machine\Companion\FollowState.cs" />
      <Compile Include="Assets\Scripts\State Machine\Companion\ICompanionState.cs" />
      <Compile Include="Assets\Scripts\State Machine\Companion\StatePatternCompanion.cs" />

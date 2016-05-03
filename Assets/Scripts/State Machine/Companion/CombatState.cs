@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CombatState : ICompanionState {
 
-    private readonly Companion companion;
+    private readonly CompanionSM companion;
     private readonly StatePatternCompanion stateMachine;
 
     //float coolDownTimer = 0.0f;

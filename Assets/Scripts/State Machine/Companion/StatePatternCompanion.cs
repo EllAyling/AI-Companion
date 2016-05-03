@@ -9,12 +9,12 @@ public class StatePatternCompanion : MonoBehaviour {
     [HideInInspector] public FollowState followState;
     [HideInInspector] public CombatState combatState;
 
-    [HideInInspector] public Companion companion;
+    [HideInInspector] public CompanionSM companion;
 
     // Use this for initialization
     void Awake ()
     {
-        companion = GetComponent<Companion>();
+        companion = GetComponent<CompanionSM>();
         followState = new FollowState(this);
         combatState = new CombatState(this);
     }
