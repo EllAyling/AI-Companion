@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class EnemyGuard : Entity {
 
     private AIBrain brain;
-    private EnemySight eyes;
+    private AISight eyes;
     private Blackboard blackboard;
     private GunController gunController;
 
@@ -18,7 +18,7 @@ public class EnemyGuard : Entity {
 
         speed = 2.0f;
 
-        eyes = GetComponentInChildren<EnemySight>();
+        eyes = GetComponentInChildren<AISight>();
         enemyNearby = false;
         blackboard = new Blackboard();
         gunController = GetComponent<GunController>();

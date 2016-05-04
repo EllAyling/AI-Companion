@@ -17,7 +17,7 @@ public class ActionGetLastSightedSearchPosition : BTNode {
         if (entity.getSearchPosition)
         {
             Transform target = blackboard.GetValueFromKey<Transform>("spottedPlayerPosition");
-            blackboard.SetValue<Vector3>("target", target.position);
+            blackboard.SetValue("target", target.position);
             entity.getSearchPosition = false;
             entity.searchingForEnemy = true;
             return NodeState.SUCCESS;

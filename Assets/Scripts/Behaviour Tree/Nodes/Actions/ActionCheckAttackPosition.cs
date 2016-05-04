@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ActionCheckPosition : BTNode {
+public class ActionAttackPosition : BTNode {
 
     private Entity entity;
-    private EnemySight eyes;
+    private AISight eyes;
 
     public override void Init(Blackboard blackboard)
     {
         this.blackboard = blackboard;
         entity = blackboard.GetValueFromKey<Entity>("entity");
-        eyes = entity.GetComponentInChildren<EnemySight>();
+        eyes = entity.GetComponentInChildren<AISight>();
     }
 
     public override NodeState Tick()

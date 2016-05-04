@@ -34,6 +34,10 @@ public class Projectile : MonoBehaviour {
         {
             OnHitObject(hit);
         }
+        else if (Physics.Raycast(ray, out hit, moveDistance))
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnHitObject(RaycastHit hit)

@@ -8,7 +8,7 @@ public class EnemyPatrol : Entity {
     public Transform[] patrolRoute;
 
     private AIBrain brain;
-    private EnemySight eyes;
+    private AISight eyes;
     private Blackboard blackboard;
     private GunController gunController;
 
@@ -20,7 +20,7 @@ public class EnemyPatrol : Entity {
         EntityType type = EntityType.Enemy | EntityType.PatrolEnemy;
         AddType(type);
 
-        eyes = GetComponentInChildren<EnemySight>();
+        eyes = GetComponentInChildren<AISight>();
         enemyNearby = false;
         blackboard = new Blackboard();
         gunController = GetComponent<GunController>();
@@ -106,7 +106,7 @@ public class EnemyPatrol : Entity {
                                 new NodeSequencer(new BTNode[]
                                 {
                                     new NodeInverter(
-                                        new ActionCheckPosition()
+                                        new ActionAttackPosition()
                                     ),
                                     new ActionGetAttackPosition(),
                                     new ActionRequestPathToTarget()

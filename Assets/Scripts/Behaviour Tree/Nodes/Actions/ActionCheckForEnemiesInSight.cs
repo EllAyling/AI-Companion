@@ -3,13 +3,13 @@ using System.Collections;
 
 public class ActionCheckForEnemiesInSight : BTNode {
 
-    private EnemySight eyes;
+    private AISight eyes;
     private Entity entity;
 
     public override void Init(Blackboard blackboard)
     {
         this.blackboard = blackboard;
-        eyes = blackboard.GetValueFromKey<EnemySight>("eyes");
+        eyes = blackboard.GetValueFromKey<AISight>("eyes");
         entity = eyes.transform.parent.GetComponent<Entity>();
     }
 
@@ -17,11 +17,22 @@ public class ActionCheckForEnemiesInSight : BTNode {
     {
         if (eyes.enemiesInSight.Count > 0)
         {
-            blackboard.SetValue("spottedPlayerPosition", eyes.spottedEnemyPosition);
-            entity.transform.LookAt(eyes.spottedEnemyPosition.position);
-            entity.getSearchPosition = true;
-            return NodeState.SUCCESS;
+            if (eyes.spottedEnemyPosition)
+            {
+                blackboard.SetValue("spottedPlayerPosition", eyes.spottedEnemyPosition);
+                entity.transform.LookAt(eyes.spottedEnemyPosition.position);
+                entity.getSearchPosition = true;
+                return NodeState.SUCCESS;
+            }
+            else
+            {
+                return NodeState.FAILURE;
+            }
         }
-        else return NodeState.FAILURE;
+        else
+        {
+            eyes.enemiesInSight.Clear();
+            return NodeState.FAILURE;
+        }
     }
 }

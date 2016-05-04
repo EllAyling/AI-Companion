@@ -115,7 +115,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 166092}
   m_LocalRotation: {x: 0, y: -0.1263183, z: 0, w: 0.99198985}
-  m_LocalPosition: {x: 16.259119, y: 0.24, z: -30.793179}
+  m_LocalPosition: {x: 3.4359446, y: 1.09, z: 24.60565}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 435120}
@@ -279,6 +279,7 @@ MonoBehaviour:
   fieldOfViewAngle: 110
   enemiesInSight: []
   spottedEnemyPosition: {fileID: 0}
+  parentEntity: {fileID: 0}
 --- !u!114 &11499542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -292,14 +293,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 0}
   startingHealth: 10
+  health: 0
   type: 0
   enemyNearby: 0
   getSearchPosition: 0
   searchingForEnemy: 0
+  enemiesMask:
+    serializedVersion: 2
+    m_Bits: 12288
+  enemiesInLevel: []
+  seenMedKits: []
   isOnPath: 0
-  moveTarget: {x: 0, y: 0, z: 0}
-  attackTarget: {x: 0, y: 0, z: 0}
+  directionOfHit: {x: 0, y: 0, z: 0}
   speed: 0
+  medKits: 0
 --- !u!135 &13509106
 SphereCollider:
   m_ObjectHideFlags: 1

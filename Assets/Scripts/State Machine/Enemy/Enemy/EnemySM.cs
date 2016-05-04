@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemySM : Entity {
 
-    public EnemySight eyes;
+    public AISight eyes;
 
     public float seachingTurnSpeed = 120.0f;
     public float searchingDuration = 4.0f;
@@ -19,7 +19,7 @@ public class EnemySM : Entity {
         AddType(type);
         speed = 2;
 
-        eyes = GetComponentInChildren<EnemySight>();
+        eyes = GetComponentInChildren<AISight>();
         statemachine = GetComponent<StatePatternEnemy>();
     }
 

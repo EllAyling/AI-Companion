@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class ActionGetAttackPosition : BTNode {
 
     private Transform target;
-    private Vector3 attackPosition;
 
     public Vector3 lastTargetPos;
 
@@ -30,11 +29,14 @@ public class ActionGetAttackPosition : BTNode {
         if (target)
         {
             GetCandidatePositions();
-            int x = Random.Range(0, candidatePositions.Count - 1);
+            if (candidatePositions.Count == 0)
+            {
+                return NodeState.FAILURE;
+            }
+            int x = Random.Range(0, candidatePositions.Count);
             Vector3 newTarget = candidatePositions[x];
             blackboard.SetValue("target", newTarget);
             lastTargetPos = newTarget;
-
 
             return NodeState.SUCCESS;
         }
@@ -47,28 +49,31 @@ public class ActionGetAttackPosition : BTNode {
         //Get positions in a semi circle behind the player
         Vector3[] positionsToCheck = FindPlayerRadiusPositions();
 
-        //Clear the list
-        candidatePositions.Clear();
-
-        //Go through positions generated from the semi circle
-        for (int i = 0; i < positionsToCheck.Length; i++)
+        if (positionsToCheck.Length > 0)
         {
-            //If there is a clear raycast to it i.e. No objects in the way to it and the player
-            if (!Physics.Linecast(target.transform.position, positionsToCheck[i]))
-            {
-                //Get the forward direction from the player
-                Vector3 forwardDirection = target.transform.forward.normalized;
-                //Get a position in 'front' of the potential position
-                Vector3 forwardPosition = positionsToCheck[i] + (forwardDirection * 2.0f);
+            //Clear the list
+            candidatePositions.Clear();
 
-                //If there's isn't anything directly in front of this position
-                if (!Physics.Linecast(positionsToCheck[i], forwardPosition))
+            //Go through positions generated from the semi circle
+            for (int i = 0; i < positionsToCheck.Length; i++)
+            {
+                //If there is a clear raycast to it i.e. No objects in the way to it and the player
+                if (!Physics.Linecast(target.transform.position, positionsToCheck[i]))
                 {
-                    //If theres a clear line to a forward position to the player. So the companion doesn't place obstacle between itself and the player. Feels more natural.
-                    if (!Physics.Linecast(target.transform.position, forwardPosition))
+                    //Get the forward direction from the player
+                    Vector3 forwardDirection = target.transform.forward.normalized;
+                    //Get a position in 'front' of the potential position
+                    Vector3 forwardPosition = positionsToCheck[i] + (forwardDirection * 2.0f);
+
+                    //If there's isn't anything directly in front of this position
+                    if (!Physics.Linecast(positionsToCheck[i], forwardPosition))
                     {
-                        //Add it to our potential positions to move to.
-                        candidatePositions.Add(positionsToCheck[i]);
+                        //If theres a clear line to a forward position to the player. So the companion doesn't place obstacle between itself and the player. Feels more natural.
+                        if (!Physics.Linecast(target.transform.position, forwardPosition))
+                        {
+                            //Add it to our potential positions to move to.
+                            candidatePositions.Add(positionsToCheck[i]);
+                        }
                     }
                 }
             }

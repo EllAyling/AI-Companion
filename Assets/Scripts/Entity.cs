@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum EntityType
 {
@@ -18,11 +19,16 @@ public class Entity : MonoBehaviour, IDamagable {
     bool dead;
 
     public float startingHealth = 10f;
-    protected float health;
+    public float health;
     public int type = 0;
     public bool enemyNearby = false;
     public bool getSearchPosition = false;
     public bool searchingForEnemy = false;
+
+    public LayerMask enemiesMask;
+    public List<GameObject> enemiesInLevel;
+
+    public List<Vector3> seenMedKits;
 
     Vector3[] path;
     protected float pathRequestRefresh = 0.8f;
@@ -33,8 +39,12 @@ public class Entity : MonoBehaviour, IDamagable {
 
     int targetIndex;
     public float speed;
+    public int medKits;
+
+    protected Blackboard blackboard;
 
     GameObject WayPoints;
+    SphereCollider col;
 
     // Use this for initialization
     public virtual void Start () {
@@ -46,8 +56,25 @@ public class Entity : MonoBehaviour, IDamagable {
         isOnPath = false;
 
         health = startingHealth;
+        medKits = 0;
+        seenMedKits = new List<Vector3>();
+
+        blackboard = new Blackboard();
+        blackboard.treeData.Add("entity", this);
+
+        col = transform.GetComponentInChildren<SphereCollider>();
 
         grid = GameObject.Find("GameController").GetComponent<Grid>();
+
+        enemiesInLevel = new List<GameObject>();
+
+        foreach (Entity entity in GameController.gameController.entitiesInLevel) //Check entities in the level against this AI's enemy type
+        {
+            if (((1 << entity.gameObject.layer) & enemiesMask) != 0)
+            {
+                enemiesInLevel.Add(entity.gameObject);
+            }
+        }
     }
 	
 	// Update is called once per frame
@@ -132,15 +159,23 @@ public class Entity : MonoBehaviour, IDamagable {
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Companion"))
+        if (enemiesInLevel.Contains(other.gameObject))
         {
-            enemyNearby = true;
+            Vector3 direction = other.transform.position - transform.position;
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, direction.normalized, out hit, col.radius))
+            {
+                if (enemiesInLevel.Contains(hit.collider.gameObject))
+                {
+                    enemyNearby = true;
+                }
+            }
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Companion"))
+        if (enemiesInLevel.Contains(other.gameObject))
         {
             enemyNearby = false;
         }

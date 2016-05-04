@@ -45,12 +45,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\MedKit.cs" />
+     <Compile Include="Assets\Scripts\AISight.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\AIBrain.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Blackboard.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionCheckAttackPosition.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionCheckForEnemiesInSight.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionCheckForEnemiesNearby.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionCheckHitLocation.cs" />
-     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionCheckPosition.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionDebug.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionFindNearestWaypoint.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionGetAttackPosition.cs" />
@@ -62,6 +64,16 @@
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionSearchingForEnemyBool.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionStopMovement.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\ActionUseWeapon.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckAggressiveStance.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckDefensiveStance.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckFollowPosition.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckPassiveStance.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckScavangeAction.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckScavangeStatus.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionGetFollowPosition.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionGetHidePosition.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionGetScavangeLocation.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionGiveMedKitToPlayer.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\BTNode.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Composite\NodeSelector.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Composite\NodeSequencer.cs" />
@@ -74,7 +86,6 @@
      <Compile Include="Assets\Scripts\Companion.cs" />
      <Compile Include="Assets\Scripts\EnemyGuard.cs" />
      <Compile Include="Assets\Scripts\EnemyPatrol.cs" />
-     <Compile Include="Assets\Scripts\EnemySight.cs" />
      <Compile Include="Assets\Scripts\Entity.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\Gun.cs" />

@@ -7,6 +7,8 @@ public class Player : Entity
     GunController gunController;
     float defaultSpeed;
 
+    int medKitValue = 2;
+
     // Use this for initialization
     public override void Start () {
         base.Start();
@@ -27,6 +29,19 @@ public class Player : Entity
         {
             gunController.Shoot();
         }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (medKits > 0 && health != startingHealth)
+            {
+                health += medKitValue;
+                medKits -= 1;
+
+                if (health > startingHealth)
+                {
+                    health = startingHealth;
+                }
+            }
+        }
         float mouseWheelDir = Input.GetAxis("Mouse ScrollWheel");
         if(mouseWheelDir != 0.0f)
         {
@@ -37,6 +52,19 @@ public class Player : Entity
         float speed = defaultSpeed - nodeWalkingOn.movementPenalty;
         playerControls.movementSettings.ForwardSpeed = speed;
 
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Companion companion = other.gameObject.GetComponent<Companion>();
+        if(companion)
+        {
+            if (companion.medKits > 0)
+            {
+                medKits += companion.medKits;
+                companion.medKits -= companion.medKits;
+            }
+        }
     }
 
     void ChangeWeapon(float mouseWheelDir)

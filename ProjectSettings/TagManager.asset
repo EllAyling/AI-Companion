@@ -8,6 +8,7 @@ TagManager:
   - Waypoint
   - Companion
   - Canvas
+  - MedKit
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Road
   - Grass
   - Enemy
-  - 
-  - 
+  - Player
+  - Companion
   - 
   - 
   - 

@@ -13,7 +13,12 @@ public class ActionLookForEnemy : BTNode {
 
     public override NodeState Tick()
     {
-       entity.transform.Rotate(0, 80.0f * Time.deltaTime, 0);
-       return NodeState.SUCCESS;   
+        if (!entity.searchingForEnemy)
+        {
+            entity.transform.Rotate(0, 80.0f * Time.deltaTime, 0);
+            return NodeState.SUCCESS;
+        }
+        else
+            return NodeState.FAILURE; 
     }
 }

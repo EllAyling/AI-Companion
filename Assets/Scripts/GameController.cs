@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
     Canvas mainCanvas;
     Player player;
 
-    public EnemySM[] enemies;
+    public Entity[] entitiesInLevel;
 
     void Awake()
     {
@@ -18,11 +18,11 @@ public class GameController : MonoBehaviour {
         mainCanvas.gameObject.SetActive(false);
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        entitiesInLevel = FindObjectsOfType(typeof(Entity)) as Entity[];
     }
 
     void Start()
     {
-        enemies = FindObjectsOfType(typeof(EnemySM)) as EnemySM[];
     }
 
     void Update()

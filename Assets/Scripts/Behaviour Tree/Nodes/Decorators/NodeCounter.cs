@@ -3,10 +3,10 @@ using System.Collections;
 
 public class NodeCounter : BTDecorator {
 
-    int count;
-    int maxCount;
+    float count;
+    float maxCount;
 
-    public NodeCounter(BTNode child, int maxCount)
+    public NodeCounter(BTNode child, float maxCount)
     {
         this.child = child;
         this.maxCount = maxCount;

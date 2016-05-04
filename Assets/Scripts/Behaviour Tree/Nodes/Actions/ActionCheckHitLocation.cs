@@ -9,7 +9,6 @@ public class ActionCheckHitLocation : BTNode {
     {
         this.blackboard = blackboard;
         entity = blackboard.GetValueFromKey<Entity>("entity");
-
     }
 
     public override NodeState Tick()
@@ -19,7 +18,7 @@ public class ActionCheckHitLocation : BTNode {
             Vector3 targetLookat = new Vector3(entity.directionOfHit.x, entity.transform.position.y, entity.directionOfHit.z);
             entity.transform.LookAt(targetLookat);
             Vector3 searchPosition = entity.transform.forward * 10.0f;
-            blackboard.SetValue<Vector3>("target", searchPosition);
+            blackboard.SetValue("target", searchPosition);
 
             entity.searchingForEnemy = true;
 
