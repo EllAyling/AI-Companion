@@ -7,6 +7,8 @@ public class Player : Entity
     GunController gunController;
     float defaultSpeed;
 
+    public Entity enemyLastFiredAt;
+
     int medKitValue = 2;
 
     // Use this for initialization
@@ -28,6 +30,11 @@ public class Player : Entity
         if (Input.GetMouseButtonDown(0))
         {
             gunController.Shoot();
+            RaycastHit hit;
+            if (Physics.Raycast(gunController.equippedGun.muzzle.transform.position, gunController.equippedGun.muzzle.transform.forward, out hit, 50.0f, enemiesMask, QueryTriggerInteraction.UseGlobal))
+            {
+                enemyLastFiredAt = hit.collider.gameObject.GetComponent<Entity>();
+            }
         }
         if (Input.GetKeyDown(KeyCode.F))
         {

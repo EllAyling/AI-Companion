@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
     Player player;
 
     public Entity[] entitiesInLevel;
+    public LayerMask overWatchPosLayer;
 
     void Awake()
     {
@@ -33,9 +34,11 @@ public class GameController : MonoBehaviour {
         {
             player.playerControls.mouseLook.SetCursorLock(false);
             player.playerControls.enabled = false;
+            player.enabled = false;
         }
         else
         {
+            player.enabled = true;
             player.playerControls.enabled = true;
             player.playerControls.mouseLook.SetCursorLock(true);
         }

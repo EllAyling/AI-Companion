@@ -41,7 +41,8 @@ public class Entity : MonoBehaviour, IDamagable {
     public float speed;
     public int medKits;
 
-    protected Blackboard blackboard;
+    public Blackboard blackboard;
+    public AISight eyes;
 
     GameObject WayPoints;
     SphereCollider col;
@@ -65,6 +66,7 @@ public class Entity : MonoBehaviour, IDamagable {
         col = transform.GetComponentInChildren<SphereCollider>();
 
         grid = GameObject.Find("GameController").GetComponent<Grid>();
+        eyes = GetComponentInChildren<AISight>();
 
         enemiesInLevel = new List<GameObject>();
 
