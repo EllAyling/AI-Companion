@@ -14,7 +14,7 @@ public class ActionGiveMedKitToPlayer : BTNode
 
     public override NodeState Tick()
     {
-        if (companion.medKits > 0)
+        if (companion.medKits > 0 || companion.ammo > 0)
         {
             Vector3 target = companion.player.transform.position - companion.player.transform.forward * 2.0f;
             blackboard.SetValue("target", target);

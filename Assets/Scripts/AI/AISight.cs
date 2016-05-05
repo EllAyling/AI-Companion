@@ -32,7 +32,7 @@ public class AISight : MonoBehaviour {
     {
         if ((parentEntity.type & (int)EntityType.Companion) != 0)
         {
-            if (other.gameObject.GetComponent<MedKit>() is MedKit)
+            if (other.gameObject.GetComponent<MedKit>() is MedKit || other.gameObject.GetComponent<exAmmo>() is exAmmo)
             {
                 if (!parentEntity.seenMedKits.Contains(other.gameObject.transform.position))
                 {

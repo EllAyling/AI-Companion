@@ -71,6 +71,11 @@ public class Player : Entity
                 medKits += companion.medKits;
                 companion.medKits -= companion.medKits;
             }
+            else if (companion.ammo > 0)
+            {
+                ammo += companion.ammo;
+                companion.ammo -= companion.ammo;
+            }
         }
     }
 

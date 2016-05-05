@@ -2,6 +2,21 @@
 using System.Collections;
 
 public class MedKit : MonoBehaviour {
+
+    Animation floating;
+
+    void Start()
+    {
+        floating = GetComponent<Animation>();
+    }
+
+    void Update()
+    {
+        if (!floating.isPlaying)
+        {
+            floating.Play();
+        }
+    }
 	
     void OnTriggerEnter(Collider other)
     {

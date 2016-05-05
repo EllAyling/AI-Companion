@@ -16,7 +16,6 @@ public class ActionStopMovement : BTNode {
     {
         entity.StopPath();
         blackboard.SetValue("target", Vector3.zero);
-        Debug.Log("Stop movement");
         return NodeState.SUCCESS;
     }
 

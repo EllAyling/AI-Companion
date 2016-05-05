@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour {
     public LayerMask collisionMask;
     float speed = 10f;
     float damage = 1f;
-    float lifeTime = 1;
+    public float lifeTime = 1;
 
     void Start()
     {
@@ -16,6 +16,11 @@ public class Projectile : MonoBehaviour {
     public void SetSpeed(float newSpeed)
     {
         speed = newSpeed;
+    }
+
+    public void SetDamage(int newDamage)
+    {
+        damage = newDamage;
     }
 
 	// Update is called once per frame

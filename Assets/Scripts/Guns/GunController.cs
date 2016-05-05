@@ -7,9 +7,11 @@ public class GunController : MonoBehaviour {
     public Transform weaponHold;
     public Gun startingGun;
     public Gun[] allGuns;
+    Entity entity;
     
     void Start()
     {
+        entity = GetComponent<Entity>();
         if (startingGun != null)
         {
             EquipGun(startingGun);
@@ -31,7 +33,28 @@ public class GunController : MonoBehaviour {
     {
         if (equippedGun != null)
         {
-            equippedGun.Shoot();
+            equippedGun.attackAnimation.Play();
+            if (equippedGun.type == GunType.Area)
+            {
+                if (entity.ammo > 0)
+                {
+                    Invoke("ShootInvoke", 0.85f);
+                }
+                else
+                {
+                    Debug.Log("No ammo");
+                }
+            }
+            else
+            {
+                equippedGun.Shoot();
+            }
         }
+    }
+
+    public void ShootInvoke()
+    {
+        entity.ammo -= 1;
+        equippedGun.Shoot();
     }
 }

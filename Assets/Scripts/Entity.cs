@@ -40,6 +40,7 @@ public class Entity : MonoBehaviour, IDamagable {
     int targetIndex;
     public float speed;
     public int medKits;
+    public int ammo;
 
     public Blackboard blackboard;
     public AISight eyes;

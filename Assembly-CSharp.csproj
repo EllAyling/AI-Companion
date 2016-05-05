@@ -100,11 +100,14 @@
      <Compile Include="Assets\Scripts\CheckUI.cs" />
      <Compile Include="Assets\Scripts\Entity.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\Guns\ExplodingBullet.cs" />
      <Compile Include="Assets\Scripts\Guns\Gun.cs" />
      <Compile Include="Assets\Scripts\Guns\GunController.cs" />
      <Compile Include="Assets\Scripts\Guns\IDamagable.cs" />
      <Compile Include="Assets\Scripts\Guns\Projectile.cs" />
+     <Compile Include="Assets\Scripts\Guns\exAmmo.cs" />
      <Compile Include="Assets\Scripts\MedKit.cs" />
+     <Compile Include="Assets\Scripts\ParticleAutoDestroy.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Tags.cs" />
      <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />

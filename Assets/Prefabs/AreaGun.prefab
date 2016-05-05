@@ -91,6 +91,7 @@ GameObject:
   - 4: {fileID: 481780}
   - 33: {fileID: 3397418}
   - 114: {fileID: 11481236}
+  - 111: {fileID: 11135506}
   m_Layer: 0
   m_Name: AreaGun
   m_TagString: Untagged
@@ -106,7 +107,7 @@ Transform:
   m_GameObject: {fileID: 100022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0.84}
-  m_LocalScale: {x: 1.8640351, y: 0.53656095, z: 0.3652924}
+  m_LocalScale: {x: 1.8640351, y: 0.515121, z: 0.3652924}
   m_Children: []
   m_Father: {fileID: 462812}
   m_RootOrder: 2
@@ -118,7 +119,7 @@ Transform:
   m_GameObject: {fileID: 110120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: -0.401, z: -0.377}
-  m_LocalScale: {x: 1, y: 1, z: 0.24986726}
+  m_LocalScale: {x: 0.91214997, y: 1, z: 0.24986726}
   m_Children: []
   m_Father: {fileID: 462812}
   m_RootOrder: 1
@@ -167,8 +168,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198470}
-  m_LocalRotation: {x: 0, y: -0.9867797, z: 0, w: 0.16206755}
-  m_LocalPosition: {x: -2.898775, y: 0.043, z: -4.61744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.12819481, y: 0.17635265, z: 0.37714052}
   m_Children:
   - {fileID: 443384}
@@ -185,7 +186,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 582a4bce5660d2044986f5f602b1849f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -211,7 +212,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: eafa5b1641afb6843bfa3514ec3ecef2, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -237,7 +238,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 20e174889ded44641bb877a0bf91ee9a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -281,6 +282,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110120}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!111 &11135506
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198470}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 63641f57900a4c44899463ae5d72768d, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 63641f57900a4c44899463ae5d72768d, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &11481236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -294,9 +310,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 443384}
   projectile: {fileID: 11482726, guid: c4a83a51cae15b74098bfbb3f6815228, type: 2}
-  msBetweenShot: 100
-  muzzleVelocity: 35
+  exBullet: {fileID: 11491418, guid: 7190fd4e0c7a62f4d986a3b23b7b8af4, type: 2}
+  msBetweenShot: 1000
+  muzzleVelocity: 30
   type: 1
+  attackAnimation: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

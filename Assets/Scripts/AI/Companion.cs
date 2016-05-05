@@ -149,9 +149,11 @@ public class Companion : Entity
                 {
                     new NodeSequencer(new BTNode[]
                     {
-                        new NodeInverter(
-                            new ActionCheckFollowPosition()
-                            ),
+                        new NodeCounter(
+                            new NodeInverter(
+                                new ActionCheckFollowPosition()
+                                ), 2
+                        ),
                         new ActionGetFollowPosition(),
                         new ActionRequestPathToTarget()
                     }),

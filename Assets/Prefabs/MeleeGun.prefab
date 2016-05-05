@@ -74,6 +74,7 @@ GameObject:
   - 4: {fileID: 448088}
   - 33: {fileID: 3372324}
   - 114: {fileID: 11430966}
+  - 111: {fileID: 11155880}
   m_Layer: 0
   m_Name: MeleeGun
   m_TagString: Untagged
@@ -111,9 +112,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193414}
-  m_LocalRotation: {x: 0, y: -0.9867797, z: 0, w: 0.16206755}
-  m_LocalPosition: {x: -3.6781173, y: -0.015, z: -4.828035}
-  m_LocalScale: {x: 0.20126581, y: 0.27687362, z: 0.5921105}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.105}
+  m_LocalScale: {x: 0.20126583, y: 0.27687362, z: 0.5921106}
   m_Children:
   - {fileID: 418288}
   - {fileID: 474122}
@@ -155,7 +156,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7e36de7c5993cdf45b6f0d0428f6d4ee, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -181,7 +182,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 91bc3ef6030c20b45abef31137c565a6, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -218,6 +219,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193414}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!111 &11155880
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193414}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 207aa63c4d2feb74299dfb058977c84d, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 207aa63c4d2feb74299dfb058977c84d, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &11430966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,8 +248,9 @@ MonoBehaviour:
   muzzle: {fileID: 418288}
   projectile: {fileID: 11482726, guid: c4a83a51cae15b74098bfbb3f6815228, type: 2}
   msBetweenShot: 100
-  muzzleVelocity: 35
+  muzzleVelocity: 50
   type: 2
+  attackAnimation: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
