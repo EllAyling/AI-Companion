@@ -17,12 +17,19 @@ public class ActionCheckHitLocation : BTNode {
         {
             Vector3 targetLookat = new Vector3(entity.directionOfHit.x, entity.transform.position.y, entity.directionOfHit.z);
             entity.transform.LookAt(targetLookat);
-            Vector3 searchPosition = entity.transform.forward * 10.0f;
-            blackboard.SetValue("target", searchPosition);
-
-            entity.searchingForEnemy = true;
-
-            entity.directionOfHit = Vector3.zero;
+            Vector3 searchPosition = entity.transform.forward * 5.0f;
+            if (Physics.Linecast(entity.transform.position, searchPosition))
+            {
+                blackboard.SetValue("target", searchPosition);
+                entity.searchingForEnemy = true;
+                entity.directionOfHit = Vector3.zero;
+            }
+            else
+            {
+                blackboard.SetValue("target", entity.transform.forward * 2.0f);
+                entity.searchingForEnemy = true;
+                entity.directionOfHit = Vector3.zero;
+            }
             return NodeState.SUCCESS;
         }
         else

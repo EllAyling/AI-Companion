@@ -32,6 +32,7 @@ public class ActionGetFollowPosition : BTNode
         {
             return NodeState.FAILURE;
         }
+
         int x = Random.Range(0, candidatePositions.Count);
         Vector3 newTarget = candidatePositions[x];
         blackboard.SetValue("target", newTarget);
@@ -68,8 +69,13 @@ public class ActionGetFollowPosition : BTNode
                         //If theres a clear line to a forward position to the player. So the companion doesn't place obstacle between itself and the player. Feels more natural.
                         if (!Physics.Linecast(player.transform.position, forwardPosition))
                         {
-                            //Add it to our potential positions to move to.
-                            candidatePositions.Add(positionsToCheck[i]);
+                            Node node = companion.grid.NodeFromWorldPoint(positionsToCheck[i]);
+                            Vector3 difference = node.worldPos - player.transform.position;
+                            if (Mathf.Abs(difference.y) < 2.0f) //If the position is on a close enough elevation to the player (i.e. stay on the same level)
+                            {
+                                //Add it to our potential positions to move to.
+                                candidatePositions.Add(positionsToCheck[i]);
+                            }
                         }
                     }
                 }

@@ -56,8 +56,14 @@ public class Grid : MonoBehaviour {
         {
             for (int y = 0; y < gridSizeY; y++)
             {
-                Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
-                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
+                Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius); //Get the world point
+
+                while (Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask)) //Cast a sphere the size of a node, and check to see if theres an unwalkable object there.
+                {
+                    worldPoint += Vector3.up * nodeRadius;  //Whilst there is, move up a node until there isn't.
+                }
+
+                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask)); //Mark it walkable.
 
                 int movementPenalty = 0;
                 if (walkable)
@@ -90,7 +96,11 @@ public class Grid : MonoBehaviour {
 
                 if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
                 {
-                    neighbours.Add(grid[checkX,checkY]);
+                    Vector3 difference = node.worldPos - grid[checkX, checkY].worldPos;
+                    if (Mathf.Abs(difference.y) < nodeDiameter)
+                    { 
+                        neighbours.Add(grid[checkX, checkY]);
+                    }
                 }
             }
         }

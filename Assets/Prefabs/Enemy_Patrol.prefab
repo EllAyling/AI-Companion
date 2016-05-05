@@ -202,7 +202,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!65 &6570504
 BoxCollider:
@@ -262,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 0}
   startingHealth: 10
+  health: 0
   type: 0
   enemyNearby: 0
   getSearchPosition: 0
@@ -270,9 +271,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 12288
   enemiesInLevel: []
+  seenMedKits: []
   isOnPath: 0
   directionOfHit: {x: 0, y: 0, z: 0}
   speed: 3
+  medKits: 0
   patrolRoute:
   - {fileID: 0}
   - {fileID: 0}

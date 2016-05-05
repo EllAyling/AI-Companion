@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckAggressiveStance.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckDefensiveStance.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckFollowPosition.cs" />
+     <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckHideTimer.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckPassiveStance.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckScavangeAction.cs" />
      <Compile Include="Assets\Scripts\Behaviour Tree\Nodes\Actions\CompanionOnlyActions\ActionCheckScavangeStatus.cs" />

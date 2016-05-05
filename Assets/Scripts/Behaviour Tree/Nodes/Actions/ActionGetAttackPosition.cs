@@ -8,6 +8,8 @@ public class ActionGetAttackPosition : BTNode {
 
     public Vector3 lastTargetPos;
 
+    Entity entity;
+
     public List<Vector3> candidatePositions;
 
     //Variables to find positions in a semi circle around the player.
@@ -21,6 +23,7 @@ public class ActionGetAttackPosition : BTNode {
         lastTargetPos = Vector3.zero;
 
         candidatePositions = new List<Vector3>();
+        entity = blackboard.GetValueFromKey<Entity>("entity");
     }
 
     public override NodeState Tick()
@@ -71,8 +74,13 @@ public class ActionGetAttackPosition : BTNode {
                         //If theres a clear line to a forward position to the player. So the companion doesn't place obstacle between itself and the player. Feels more natural.
                         if (!Physics.Linecast(target.transform.position, forwardPosition))
                         {
-                            //Add it to our potential positions to move to.
-                            candidatePositions.Add(positionsToCheck[i]);
+                            Node node = entity.grid.NodeFromWorldPoint(positionsToCheck[i]);
+                            Vector3 difference = node.worldPos - target.transform.position;
+                            if (Mathf.Abs(difference.y) < 2.0f) //If the position is on a close enough elevation to the player (i.e. stay on the same level)
+                            {
+                                //Add it to our potential positions to move to.
+                                candidatePositions.Add(positionsToCheck[i]);
+                            }
                         }
                     }
                 }

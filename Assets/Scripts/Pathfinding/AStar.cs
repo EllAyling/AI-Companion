@@ -95,14 +95,21 @@ public class AStar : MonoBehaviour {
 		List<Vector3> waypoints = new List<Vector3>();
 		Vector2 directionOld = Vector2.zero;
 
-		for (int i = 1; i < path.Count; i ++) {
-			Vector2 directionNew = new Vector2(path[i-1].gridX - path[i].gridX,path[i-1].gridY - path[i].gridY);
-			if (directionNew != directionOld)
+        for (int i = 1; i < path.Count; i++)
+        {
+            if (path[i].worldPos.y != path[i - 1].worldPos.y) //If the two nodes are different elevations, don't shorten, just add it. Stops flying to waypoints on different elevations
             {
-				waypoints.Add(path[i].worldPos);
-			}
-			directionOld = directionNew;
-		}
+                waypoints.Add(path[i].worldPos);
+            }
+
+            Vector2 directionNew = new Vector2(path[i - 1].gridX - path[i].gridX, path[i - 1].gridY - path[i].gridY); //Otherwise get the direction between the two nodes
+            if (directionNew != directionOld) //If it's a different direction
+            {
+                waypoints.Add(path[i].worldPos); //Add it to our waypoints
+            }
+            directionOld = directionNew; //Set the current(old) direction
+
+        }
 		return waypoints.ToArray();
 	}
 

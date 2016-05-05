@@ -50,6 +50,15 @@ public class Companion : Entity
                     ),
                     new NodeSequencer(new BTNode[]
                     {
+                        new ActionReachedTarget(),
+                        new NodeInverter(
+                            new ActionCheckHideTimer()
+                        ),
+                        new ActionGetHidePosition(),
+                        new ActionRequestPathToTarget()
+                    }),
+                    new NodeSequencer(new BTNode[]
+                    {
                         new ActionCheckForEnemiesInSight(),
                         new NodeSelector(new BTNode[]
                         {
@@ -59,7 +68,6 @@ public class Companion : Entity
                                 new NodeCounter(
                                     new NodeSequencer(new BTNode[]
                                     {
-                                        new ActionReachedTarget(),
                                         new ActionGetHidePosition(),
                                         new ActionRequestPathToTarget()
                                     }), 1
@@ -102,10 +110,11 @@ public class Companion : Entity
                         new NodeCounter(
                             new NodeInverter(
                                 new ActionCheckFollowPosition()
-                            ), 0.5f
+                            ), 2.0f
                         ),
                         new NodeSequencer(new BTNode[]
                         {
+                            new ActionReachedTarget(),
                             new ActionGetFollowPosition(),
                             new ActionRequestPathToTarget()
                         })
