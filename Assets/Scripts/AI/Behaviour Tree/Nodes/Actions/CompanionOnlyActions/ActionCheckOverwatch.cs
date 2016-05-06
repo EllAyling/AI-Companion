@@ -3,9 +3,7 @@ using System.Collections;
 
 public class ActionCheckOverwatch : BTNode
 {
-
     private Companion companion;
-   
 
     public override void Init(Blackboard blackboard)
     {

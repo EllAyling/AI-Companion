@@ -13,7 +13,6 @@ public class Node : IHeapItem<Node> {
     public int gCost;
     public int hCost;
     public Node parent;
-    int heapIndex;
 
     public Node(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY, int _penalty)
     {
@@ -31,11 +30,11 @@ public class Node : IHeapItem<Node> {
     public int CompareTo(Node nodeToCompare)
     {
         int compare = fCost.CompareTo(nodeToCompare.fCost);
-        if (compare == 0)
+        if (compare == 0)       //If the fCosts are equal
         {
-            compare = hCost.CompareTo(nodeToCompare.hCost);
+            compare = hCost.CompareTo(nodeToCompare.hCost); //Compare the hcost
         }
-        return -compare;
+        return -compare;    //Return negative compare to return positive 1 if LOWER
     }
 }
 

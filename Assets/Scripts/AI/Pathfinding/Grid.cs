@@ -65,7 +65,7 @@ public class Grid : MonoBehaviour {
 
                 bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask)); //Mark it walkable.
 
-                if (!Physics.Raycast(worldPoint, Vector3.down))
+                if (!Physics.Raycast(worldPoint, Vector3.down)) //Raycast below this position to check if there is anything below us. I.e this isn't an empty part of the grid- used to allow us to make bridges and areas without borders
                 {
                     walkable = false;
                 }
@@ -73,9 +73,9 @@ public class Grid : MonoBehaviour {
                 int movementPenalty = 0;
                 if (walkable)
                 {
-                    Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
+                    Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down); //Check for the layer mask of the object this node is on
                     RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, 100, walkableMask))
+                    if (Physics.Raycast(ray, out hit, 100, walkableMask))   
                     {
                         walkableRegionsDictionary.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
                     }

@@ -22,7 +22,7 @@ public class ActionGetWanderLocation : BTNode {
 
     public Vector3 Search()
     {
-        Vector2 target = Random.insideUnitCircle * 8;
+        Vector2 target = Random.insideUnitCircle;
 
         Vector3 finalTarget = entity.transform.position + new Vector3(target.x, 0.0f, target.y); //Change from xy plane to xz plane
         finalTarget *= 1.4f;

@@ -29,36 +29,36 @@ public class AStar : MonoBehaviour {
         Node startNode = grid.NodeFromWorldPoint(startPos);
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
 
-        if (startNode.walkable && targetNode.walkable)
+        if (startNode.walkable && targetNode.walkable)  //If we can actually get the the target node
         {
-            Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
+            Heap<Node> openSet = new Heap<Node>(grid.MaxSize); 
             HashSet<Node> closedSet = new HashSet<Node>();
-            openSet.Add(startNode);
+            openSet.Add(startNode); //Add the first node
 
             while (openSet.Count > 0)
             {
                 Node currentNode = openSet.RemoveFirst();
                 closedSet.Add(currentNode);
 
-                if (currentNode == targetNode)
+                if (currentNode == targetNode)  //Are we here?
                 {
-                    pathSuccess = true;
+                    pathSuccess = true; //yes
                     break;
                 }
 
-                foreach (Node neighbour in grid.GetNeighbours(currentNode))
+                foreach (Node neighbour in grid.GetNeighbours(currentNode)) //For every neighbour to our node
                 {
-                    if (!neighbour.walkable || closedSet.Contains(neighbour))
+                    if (!neighbour.walkable || closedSet.Contains(neighbour))       //If the neighbour is walkable or we've already looked at it
                     {
                         continue;
                     }
 
-                    int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
-                    if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
+                    int newMovementCostToNeighbour = currentNode.gCost + GetDistanceCost(currentNode, neighbour);  //Get the cost
+                    if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour)) //If this new cost is shorter or the neighbour isnt in the openset
                     {
-                        neighbour.gCost = newMovementCostToNeighbour;
-                        neighbour.hCost = GetDistance(neighbour, targetNode);
-                        neighbour.parent = currentNode;
+                        neighbour.gCost = newMovementCostToNeighbour; //Set the gCost
+                        neighbour.hCost = GetDistanceCost(neighbour, targetNode); //Heauristic
+                        neighbour.parent = currentNode; //Set the tree/path
 
                         if (!openSet.Contains(neighbour))
                             openSet.Add(neighbour);
@@ -79,12 +79,12 @@ public class AStar : MonoBehaviour {
         List<Node> path = new List<Node>();
         Node currentNode = endNode;
 
-        while (currentNode != startNode)
+        while (currentNode != startNode) //Go back through the tree
         {
             path.Add(currentNode);
-            currentNode = currentNode.parent;
+            currentNode = currentNode.parent; //Create our path
         }
-        Vector3[] waypoints = SimplifyPath(path);
+        Vector3[] waypoints = SimplifyPath(path); //Change to vector positions
         Array.Reverse(waypoints);
         return waypoints;
 
@@ -113,13 +113,13 @@ public class AStar : MonoBehaviour {
 		return waypoints.ToArray();
 	}
 
-    public static int GetDistance(Node nodeA, Node nodeB)
+    public static int GetDistanceCost(Node nodeA, Node nodeB) //Manhatten distance
     {
-        int disX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
-        int disY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
+        int distanceX = Mathf.Abs(nodeA.gridX - nodeB.gridX); //Get the x distance
+        int distanceY = Mathf.Abs(nodeA.gridY - nodeB.gridY); //Get the y distance
 
-        if (disX > disY) return 14 * disY + 10 * (disX - disY); //Pyag Theourm
+        if (distanceX > distanceY) return 14 * distanceY + 10 * (distanceX - distanceY); //Pyag Theourm- 14 for diagonal movement, 10 for straight movement. Square root of 2 triangle * 10.
 
-        return 14 * disX + 10 * (disY - disX);
+        return 14 * distanceX + 10 * (distanceY - distanceX);
     }
 }
