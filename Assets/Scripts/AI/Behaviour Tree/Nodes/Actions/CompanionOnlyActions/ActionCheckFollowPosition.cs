@@ -22,7 +22,7 @@ public class ActionCheckFollowPosition : BTNode
         }
         else
         {
-            distanceFromPlayer = 14.0f;
+            distanceFromPlayer = 20.0f;
         }
 
         if (eyes.enemiesInSight.Count > 0)

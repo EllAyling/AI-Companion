@@ -23,9 +23,18 @@ public class exAmmo : MonoBehaviour {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Companion"))
         {
             other.gameObject.GetComponent<Entity>().ammo += 1;
-            if (other.gameObject.GetComponent<Entity>().seenMedKits.Contains(transform.position))
+            if (other.gameObject.GetComponent<Entity>().seenMedKits.ContainsKey(gameObject.name))
             {
-                other.gameObject.GetComponent<Entity>().seenMedKits.Remove(transform.position);
+                Debug.Log(gameObject.name);
+                other.gameObject.GetComponent<Entity>().seenMedKits.Remove(gameObject.name);
+            }
+
+            if (other.gameObject.GetComponent<Player>())
+            {
+                if (other.gameObject.GetComponent<Player>().companion.seenMedKits.ContainsKey(gameObject.name))
+                {
+                    other.gameObject.GetComponent<Player>().companion.seenMedKits.Remove(gameObject.name);
+                }
             }
             Destroy(gameObject);
         }

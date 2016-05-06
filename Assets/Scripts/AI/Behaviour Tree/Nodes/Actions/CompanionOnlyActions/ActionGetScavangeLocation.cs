@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ActionGetScavangeLocation : BTNode
 {
@@ -33,12 +34,20 @@ public class ActionGetScavangeLocation : BTNode
 
     public Vector3 GetNearestSeenMedkitPosition()
     {
-
-        Vector3 closestPosition = companion.seenMedKits[0];
-        float distance = Vector3.Distance(companion.transform.position, companion.seenMedKits[0]);
-        for (int i = 1; i < companion.seenMedKits.Count; i++)
+        bool first = true;
+        float distance = float.MaxValue;
+        Vector3 closestPosition = Vector3.zero;
+        foreach (KeyValuePair<string, Vector3> medKit in companion.seenMedKits)
         {
-            Vector3 position = companion.seenMedKits[i];
+            if (first)
+            {
+                closestPosition = medKit.Value;
+                distance = Vector3.Distance(companion.transform.position, closestPosition);
+                first = false;
+                continue;
+            }
+
+            Vector3 position = medKit.Value;
             float distanceNew = Vector3.Distance(companion.transform.position, position);
             if (distanceNew < distance)
             {

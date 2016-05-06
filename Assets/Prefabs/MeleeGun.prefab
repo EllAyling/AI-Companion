@@ -247,10 +247,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 418288}
   projectile: {fileID: 11482726, guid: c4a83a51cae15b74098bfbb3f6815228, type: 2}
-  msBetweenShot: 100
+  exBullet: {fileID: 0}
+  msBetweenShot: 200
   muzzleVelocity: 50
   type: 2
   attackAnimation: {fileID: 0}
+  damage: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -12,6 +12,7 @@ public class AISight : MonoBehaviour {
 
     public SphereCollider col;
 
+    List<GameObject> enemiesDead  = new List<GameObject>();
     void Start()
     {
         col = GetComponent<SphereCollider>();
@@ -24,8 +25,34 @@ public class AISight : MonoBehaviour {
         if (enemiesInSight.Count > 0)
         {
             GameObject target = TargetToPrioritise();
-            spottedEnemyPosition = target.transform;
+            if (target)
+            {
+                spottedEnemyPosition = target.transform;
+            }
+            else
+            {
+                spottedEnemyPosition = null;
+            }
         }
+
+        foreach (GameObject enemy in enemiesInSight)
+        {
+            if (enemy == null)
+            {
+                enemiesDead.Add(enemy);
+            }
+        }
+
+        if (enemiesDead.Count > 0)
+        {
+            foreach (GameObject enemy in enemiesDead)
+            {
+                enemiesInSight.Remove(enemy);
+            }
+
+            enemiesDead.Clear();
+        }
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -34,9 +61,9 @@ public class AISight : MonoBehaviour {
         {
             if (other.gameObject.GetComponent<MedKit>() is MedKit || other.gameObject.GetComponent<exAmmo>() is exAmmo)
             {
-                if (!parentEntity.seenMedKits.Contains(other.gameObject.transform.position))
+                if (!parentEntity.seenMedKits.ContainsKey(other.gameObject.name))
                 {
-                    parentEntity.seenMedKits.Add(other.gameObject.transform.position);
+                    parentEntity.seenMedKits.Add(other.gameObject.name, other.gameObject.transform.position);
                 }
             }
         }
@@ -86,19 +113,32 @@ public class AISight : MonoBehaviour {
         {
             foreach (GameObject enemy in enemiesInSight) //If any of them are the player, dont even bother checking distance. Target player.
             {
-                if ((enemy.GetComponent<Entity>().type & (int)EntityType.Player) != 0)
+                if (enemy)
                 {
-                    return enemy.gameObject;
+                    if ((enemy.GetComponent<Entity>().type & (int)EntityType.Player) != 0)
+                    {
+                        return enemy.gameObject;
+                    }
                 }
             }
         }
 
         foreach (GameObject enemy in enemiesInSight) //Otherwise get the closest enemy.
         {
-            float distance = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distance < Vector3.Distance(transform.position, closestEnemy.transform.position))
+            if (enemy)
             {
-                closestEnemy = enemy;
+                float distance = Vector3.Distance(transform.position, enemy.transform.position);
+                if (closestEnemy)
+                {
+                    if (distance < Vector3.Distance(transform.position, closestEnemy.transform.position))
+                    {
+                        closestEnemy = enemy;
+                    }
+                }
+                else
+                {
+                    continue;
+                }
             }
         }
         return closestEnemy;

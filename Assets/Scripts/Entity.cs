@@ -10,6 +10,8 @@ public enum EntityType
     Enemy = 1 << 2,
     PatrolEnemy = 1 << 3,
     MeleeEnemy = 1 << 4,
+    GuardEnemy = 1 << 5,
+    HunterEnemy = 1 << 6,
 }
 
 public class Entity : MonoBehaviour, IDamagable {
@@ -28,7 +30,7 @@ public class Entity : MonoBehaviour, IDamagable {
     public LayerMask enemiesMask;
     public List<GameObject> enemiesInLevel;
 
-    public List<Vector3> seenMedKits;
+    public Dictionary<string, Vector3> seenMedKits;
 
     Vector3[] path;
     protected float pathRequestRefresh = 0.8f;
@@ -48,6 +50,8 @@ public class Entity : MonoBehaviour, IDamagable {
     GameObject WayPoints;
     SphereCollider col;
 
+    public GameObject hitParticles;
+
     // Use this for initialization
     public virtual void Start () {
         AddType(EntityType.Entity);
@@ -59,7 +63,7 @@ public class Entity : MonoBehaviour, IDamagable {
 
         health = startingHealth;
         medKits = 0;
-        seenMedKits = new List<Vector3>();
+        seenMedKits = new Dictionary<string, Vector3>();
 
         blackboard = new Blackboard();
         blackboard.treeData.Add("entity", this);
@@ -211,6 +215,10 @@ public class Entity : MonoBehaviour, IDamagable {
     {
         directionOfHit = transform.position + hit.normal;
         health -= damage;
+        if (hitParticles != null)
+        {
+            Instantiate(hitParticles, transform.position, Quaternion.FromToRotation(Vector3.forward, directionOfHit));
+        }
         if (health <= 0)
         {
             dead = true;

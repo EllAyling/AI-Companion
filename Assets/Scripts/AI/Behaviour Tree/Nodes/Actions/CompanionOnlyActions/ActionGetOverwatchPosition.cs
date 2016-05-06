@@ -13,7 +13,7 @@ public class ActionGetOverwatchPosition : BTNode {
 
     public override NodeState Tick()
     {
-        Collider[] OWpos = Physics.OverlapSphere(companion.transform.position, 50.0f, GameController.gameController.overWatchPosLayer, QueryTriggerInteraction.Collide);
+        Collider[] OWpos = Physics.OverlapSphere(companion.transform.position, 100.0f, GameController.gameController.overWatchPosLayer, QueryTriggerInteraction.Collide);
 
         Vector3 closestPos = new Vector3();
         if (OWpos.Length > 0)

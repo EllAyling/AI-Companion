@@ -15,25 +15,55 @@ public class CheckUI : MonoBehaviour {
     public Toggle flank;
 
     public Button scavenge;
-
     public Button follow;
 
+    public GameObject buttonGroup;
+
+    public Player player;
     public Companion companion;
 
+    public Text health;
+    public Text ammo;
+    public Text medkits;
 
 	// Use this for initialization
 	void Start () {
         aggressive.isOn = true;
         stayClose.isOn = true;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (companion.currentAction == CompanionAction.FOLLOW)
-        {
-            flank.isOn = false;
-        }
+        CheckToggleStates();
+        CheckPlayerInput();
+        UpdateHealthAmmoCounters();
+    }
+
+    public void onFollowButton()
+    {
+        companion.StopPath();
+        companion.blackboard.SetValue("target", Vector3.zero);
+        companion.ChangeAction(CompanionAction.FOLLOW);
+        overwatch.isOn = false;
+        flank.isOn = false;
+        follow.image.color = Color.green;
+        scavenge.image.color = Color.white;
+    }
+
+    public void onScavengeButton()
+    {
+        companion.StopPath();
+        companion.blackboard.SetValue("target", Vector3.zero);
+        companion.ChangeAction(CompanionAction.SCAVENGE);
+        overwatch.isOn = false;
+        flank.isOn = false;
+        scavenge.image.color = Color.green;
+        follow.image.color = Color.white;
+    }
+
+    public void CheckToggleStates()
+    {
 
         if (aggressive.isOn)
         {
@@ -71,28 +101,35 @@ public class CheckUI : MonoBehaviour {
             {
                 companion.FollowState = FollowState.FAR;
             }
-        }       
-	}
-
-    public void onFollowButton()
-    {
-        companion.StopPath();
-        companion.blackboard.SetValue("target", Vector3.zero);
-        companion.ChangeAction(CompanionAction.FOLLOW);
-        overwatch.isOn = false;
-        flank.isOn = false;
-        follow.image.color = Color.green;
-        scavenge.image.color = Color.white;
+        }
+        if (companion.currentAction != CompanionAction.FLANK)
+        {
+            flank.isOn = false;
+        }
     }
 
-    public void onScavengeButton()
+    public void CheckPlayerInput()
     {
-        companion.StopPath();
-        companion.blackboard.SetValue("target", Vector3.zero);
-        companion.ChangeAction(CompanionAction.SCAVENGE);
-        overwatch.isOn = false;
-        flank.isOn = false;
-        scavenge.image.color = Color.green;
-        follow.image.color = Color.white;
+        if (Input.GetMouseButtonDown(1)) buttonGroup.SetActive(!buttonGroup.activeSelf);
+
+        if (buttonGroup.activeSelf)
+        {
+            player.playerControls.mouseLook.SetCursorLock(false);
+            player.playerControls.enabled = false;
+            player.enabled = false;
+        }
+        else
+        {
+            player.enabled = true;
+            player.playerControls.enabled = true;
+            player.playerControls.mouseLook.SetCursorLock(true);
+        }
+    }
+
+    public void UpdateHealthAmmoCounters()
+    {
+        health.text = "HEALTH: " + player.health;
+        ammo.text = "AMMO: " + player.ammo;
+        medkits.text = "MEDKITS: " + player.medKits;
     }
 }

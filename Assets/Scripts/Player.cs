@@ -4,12 +4,13 @@ using System.Collections;
 public class Player : Entity
 {
     public UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController playerControls;
+    public Companion companion;
     GunController gunController;
     float defaultSpeed;
 
     public Entity enemyLastFiredAt;
 
-    int medKitValue = 2;
+    public int medKitValue = 2;
 
     // Use this for initialization
     public override void Start () {

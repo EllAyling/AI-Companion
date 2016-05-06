@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165016}
   m_LocalRotation: {x: 0, y: -0.1263183, z: 0, w: 0.99198985}
-  m_LocalPosition: {x: -2.4902134, y: 0.6, z: 13.501878}
+  m_LocalPosition: {x: -13.869978, y: 0.9, z: -138.57834}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 430762}
@@ -133,7 +133,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: abe17d17cf2308d4eb2dc63028faf73a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -261,8 +261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 0}
-  startingHealth: 10
-  health: 0
+  startingHealth: 30
+  health: 30
   type: 0
   enemyNearby: 0
   getSearchPosition: 0
@@ -271,17 +271,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 12288
   enemiesInLevel: []
-  seenMedKits: []
   isOnPath: 0
   directionOfHit: {x: 0, y: 0, z: 0}
   speed: 3
   medKits: 0
-  patrolRoute:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  ammo: 0
+  eyes: {fileID: 0}
+  hitParticles: {fileID: 129358, guid: 98b74b95be56131478c77db8ee3b6e2d, type: 2}
+  patrolRoute: []
 --- !u!114 &11465636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,6 +294,7 @@ MonoBehaviour:
   enemiesInSight: []
   spottedEnemyPosition: {fileID: 0}
   parentEntity: {fileID: 0}
+  col: {fileID: 0}
 --- !u!114 &11478352
 MonoBehaviour:
   m_ObjectHideFlags: 1

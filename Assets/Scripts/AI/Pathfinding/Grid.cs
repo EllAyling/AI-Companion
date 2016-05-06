@@ -58,12 +58,17 @@ public class Grid : MonoBehaviour {
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius); //Get the world point
 
-                while (Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask)) //Cast a sphere the size of a node, and check to see if theres an unwalkable object there.
+                while (Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask, QueryTriggerInteraction.Collide)) //Cast a sphere the size of a node, and check to see if theres an unwalkable object there.
                 {
                     worldPoint += Vector3.up * nodeRadius;  //Whilst there is, move up a node until there isn't.
                 }
 
                 bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask)); //Mark it walkable.
+
+                if (!Physics.Raycast(worldPoint, Vector3.down))
+                {
+                    walkable = false;
+                }
 
                 int movementPenalty = 0;
                 if (walkable)

@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
     static public GameController gameController;
-
-    Canvas mainCanvas;
-    Player player;
+    
+    public Player player;
 
     public Entity[] entitiesInLevel;
     public LayerMask overWatchPosLayer;
@@ -15,8 +15,6 @@ public class GameController : MonoBehaviour {
     void Awake()
     {
         gameController = this;
-        mainCanvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
-        mainCanvas.gameObject.SetActive(false);
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         entitiesInLevel = FindObjectsOfType(typeof(Entity)) as Entity[];
@@ -28,19 +26,10 @@ public class GameController : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) mainCanvas.gameObject.SetActive(!mainCanvas.gameObject.activeSelf);
-
-        if (mainCanvas.gameObject.activeSelf)
+        if (player == null)
         {
-            player.playerControls.mouseLook.SetCursorLock(false);
-            player.playerControls.enabled = false;
-            player.enabled = false;
-        }
-        else
-        {
-            player.enabled = true;
-            player.playerControls.enabled = true;
-            player.playerControls.mouseLook.SetCursorLock(true);
-        }
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+        }   
     }
 }

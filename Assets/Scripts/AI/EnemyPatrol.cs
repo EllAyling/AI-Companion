@@ -103,7 +103,7 @@ public class EnemyPatrol : Entity {
                                 new NodeSequencer(new BTNode[]
                                 {
                                     new NodeInverter(
-                                        new ActionAttackPosition()
+                                        new ActionCheckAttackPosition()
                                     ),
                                     new ActionGetAttackPosition(),
                                     new ActionRequestPathToTarget()

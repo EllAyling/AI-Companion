@@ -33,7 +33,7 @@ public class Companion : Entity
     public FollowState FollowState;
     public float followDistance;
 
-
+    Entity enemyLookedAt;
     
     private GunController gunController;
     private AIBrain brain;
@@ -164,6 +164,7 @@ public class Companion : Entity
                             new NodeInverter(
                                 new ActionCheckDefensiveStance()
                             ),
+                            new ActionCheckForEnemiesInSight(),
                             new NodeAlwaysFail(
                                 new ActionUseWeapon()
                             )
@@ -205,6 +206,14 @@ public class Companion : Entity
     void Update()
     {
         brain.Update();
+
+        if (player.enemyLastFiredAt && enemyLookedAt != player.enemyLastFiredAt)
+        {
+            transform.LookAt(player.enemyLastFiredAt.transform);
+            enemyLookedAt = player.enemyLastFiredAt;
+        }
+
+
     }
 
     public void ChangeStance(Stance newStance)

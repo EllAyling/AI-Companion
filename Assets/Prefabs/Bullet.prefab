@@ -13,6 +13,7 @@ GameObject:
   - 23: {fileID: 2306902}
   - 114: {fileID: 11482726}
   - 54: {fileID: 5445056}
+  - 96: {fileID: 9682780}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137960}
   m_LocalRotation: {x: 0, y: 0.14055838, z: 0, w: 0.99007237}
-  m_LocalPosition: {x: 9.8464365, y: 2.280126, z: 32.399223}
+  m_LocalPosition: {x: 54.095, y: -1.47, z: -159.26}
   m_LocalScale: {x: 0.047623176, y: 0.047623165, z: 0.047623165}
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,7 +73,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137960}
   serializedVersion: 2
-  m_Mass: 0.26
+  m_Mass: 0.13
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -92,6 +93,53 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!96 &9682780
+TrailRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137960}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 7bb8a38a90c2e0240b864d96d3956c91, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Time: 5
+  m_StartWidth: -0.06
+  m_EndWidth: 0.13
+  m_Colors:
+    m_Color[0]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[1]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[2]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[3]:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_Color[4]:
+      serializedVersion: 2
+      rgba: 16777215
+  m_MinVertexDistance: 0.37
+  m_Autodestruct: 1
 --- !u!114 &11482726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 14336
   lifeTime: 1
 --- !u!1001 &100100000
 Prefab:

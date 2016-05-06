@@ -11,7 +11,7 @@ public class EnemyGuard : Entity {
     public override void Start () {
 
         base.Start();
-        EntityType type = EntityType.Enemy | EntityType.PatrolEnemy;
+        EntityType type = EntityType.Enemy | EntityType.GuardEnemy;
         AddType(type);
 
         speed = 2.0f;

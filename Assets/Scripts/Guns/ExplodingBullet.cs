@@ -4,14 +4,16 @@ using System.Collections;
 public class ExplodingBullet : MonoBehaviour {
 
     float speed = 10f;
-    float damage = 5f;
-    public float lifeTime = 3;
+    float damage = 20f;
+    public float lifeTime = 10;
     public float explodeRadius = 5.0f;
     public GameObject explosion;
+    AudioSource boom;
 
     void Start()
     {
         Destroy(gameObject, lifeTime);
+        boom = GetComponent<AudioSource>();
     }
 
     public void SetSpeed(float newSpeed)
@@ -29,7 +31,6 @@ public class ExplodingBullet : MonoBehaviour {
 
     void CheckCollisions(float moveDistance)
     {
-        Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
         if (Physics.SphereCast(transform.position, 0.1f, transform.forward, out hit, 10))
@@ -42,6 +43,7 @@ public class ExplodingBullet : MonoBehaviour {
     {
         Collider[] colliders = Physics.OverlapSphere(hit.point, explodeRadius);
         Instantiate(explosion, hit.point, Quaternion.identity);
+        boom.Play();
 
         foreach (Collider col in colliders)
         {

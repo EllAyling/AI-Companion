@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ActionAttackPosition : BTNode {
+public class ActionCheckAttackPosition : BTNode {
 
     private Entity entity;
     private AISight eyes;
