@@ -56,7 +56,7 @@ public class EnemyHunter : Entity {
                         new ActionReachedTarget(),
                         new ActionLookForEnemy(),
                         new NodeCounter(
-                            new ActionMoveToPlayer(), 30
+                            new ActionMoveToPlayer(), 5
                         ),
                         new NodeAlwaysFail(
                             new ActionRequestPathToTarget()

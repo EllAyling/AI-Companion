@@ -86,16 +86,6 @@ public class EnemyMelee : Entity {
                             new ActionReachedTarget()
                         })
                     }),
-                    new NodeAlwaysSuccess(
-                        new NodeSequencer(new BTNode[]
-                        {
-                            new NodeInverter(
-                                new ActionCheckAttackPosition()
-                             ),
-                            new ActionMoveToPlayer(),
-                            new ActionRequestPathToTarget()
-                        })
-                   )
                 }),
                 new ActionRequestPathToTarget()
             });

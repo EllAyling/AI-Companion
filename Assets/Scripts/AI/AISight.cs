@@ -109,7 +109,7 @@ public class AISight : MonoBehaviour {
     {
         GameObject closestEnemy = enemiesInSight[0];
 
-        if ((parentEntity.type & (int)EntityType.Enemy) != 0) //If we're an enemy...
+        if ((parentEntity.type & (int)EntityType.Enemy) != 0 && (parentEntity.type & (int)EntityType.GuardEnemy) == 0) //If we're an enemy...
         {
             foreach (GameObject enemy in enemiesInSight) //If any of them are the player, dont even bother checking distance. Target player.
             {
