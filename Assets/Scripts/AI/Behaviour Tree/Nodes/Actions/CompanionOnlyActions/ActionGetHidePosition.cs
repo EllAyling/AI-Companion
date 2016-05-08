@@ -16,25 +16,49 @@ public class ActionGetHidePosition : BTNode
     {
         if (companion.eyes.enemiesInSight.Count > 0)
         {
-            Vector3 dir = companion.transform.position - companion.eyes.spottedEnemyPosition.transform.position;
-            dir.Normalize();
+            if (companion.safeLocations.Count > 0)
+            {
+                Vector3 target = companion.safeLocations[companion.safeLocations.Count - 1];
+                companion.safeLocations.Remove(target);
 
-            Vector3 target = companion.transform.position + dir;
-            target *= 1.5f;
-            blackboard.SetValue("target", target);
-            companion.ChangeAction(CompanionAction.HIDE);
-            return NodeState.SUCCESS;
+                blackboard.SetValue("target", target);
+                companion.ChangeAction(CompanionAction.HIDE);
+                return NodeState.SUCCESS;
+            }
+            else
+            {
+                Vector3 dir = companion.transform.position - companion.eyes.spottedEnemyPosition.transform.position;
+                dir.Normalize();
+
+                Vector3 target = companion.transform.position + dir;
+                target *= 1.5f;
+                blackboard.SetValue("target", target);
+                companion.ChangeAction(CompanionAction.HIDE);
+                return NodeState.SUCCESS;
+            }
         }
         else if (companion.currentAction == CompanionAction.HIDE)
         {
-            Vector3 dir = companion.transform.position - companion.player.transform.position;
-            dir.Normalize();
+            if (companion.safeLocations.Count > 0)
+            {
+                Vector3 target = companion.safeLocations[companion.safeLocations.Count - 1];
+                companion.safeLocations.Remove(target);
 
-            Vector3 target = companion.transform.position + dir;
-            target *= 1.5f;
-            blackboard.SetValue("target", target);
-            companion.ChangeAction(CompanionAction.FOLLOW);
-            return NodeState.SUCCESS;
+                blackboard.SetValue("target", target);
+                companion.ChangeAction(CompanionAction.HIDE);
+                return NodeState.SUCCESS;
+            }
+            else
+            {
+                Vector3 dir = companion.transform.position - companion.eyes.spottedEnemyPosition.transform.position;
+                dir.Normalize();
+
+                Vector3 target = companion.transform.position + dir;
+                target *= 1.5f;
+                blackboard.SetValue("target", target);
+                companion.ChangeAction(CompanionAction.HIDE);
+                return NodeState.SUCCESS;
+            }
         }
         else
         {

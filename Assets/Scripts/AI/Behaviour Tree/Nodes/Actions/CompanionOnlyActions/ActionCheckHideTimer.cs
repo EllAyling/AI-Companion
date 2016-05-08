@@ -19,6 +19,14 @@ public class ActionCheckHideTimer : BTNode
 
     public override NodeState Tick()
     {
+        if (companion.hiding)
+        {
+            Debug.Log("Hiding");
+            tickTime = 0;
+            companion.currentAction = CompanionAction.HIDE;
+            companion.hiding = false;
+            return NodeState.FAILURE;
+        }
         if (companion.currentAction == CompanionAction.HIDE)
         {
             if (tickTime < comeFromHideTick)
@@ -29,12 +37,13 @@ public class ActionCheckHideTimer : BTNode
             else
             {
                 tickTime = 0;
+                companion.currentAction = CompanionAction.FOLLOW;
                 return NodeState.FAILURE;
             }
         }
         else
         {
-            tickTime = comeFromHideTick;
+            //tickTime = comeFromHideTick;
             return NodeState.SUCCESS;
         }
     }

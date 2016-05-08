@@ -16,6 +16,7 @@ public class CheckUI : MonoBehaviour {
 
     public Button scavenge;
     public Button follow;
+    public Button hide;
 
     public GameObject buttonGroup;
 
@@ -25,6 +26,7 @@ public class CheckUI : MonoBehaviour {
     public Text health;
     public Text ammo;
     public Text medkits;
+    public Text buffed;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +40,15 @@ public class CheckUI : MonoBehaviour {
         CheckToggleStates();
         CheckPlayerInput();
         UpdateHealthAmmoCounters();
+
+        if (player.buffed)
+        {
+            buffed.gameObject.SetActive(true);
+        }
+        else
+        {
+            buffed.gameObject.SetActive(false);
+        }
     }
 
     public void onFollowButton()
@@ -49,6 +60,7 @@ public class CheckUI : MonoBehaviour {
         flank.isOn = false;
         follow.image.color = Color.green;
         scavenge.image.color = Color.white;
+        hide.image.color = Color.white;
     }
 
     public void onScavengeButton()
@@ -59,6 +71,20 @@ public class CheckUI : MonoBehaviour {
         overwatch.isOn = false;
         flank.isOn = false;
         scavenge.image.color = Color.green;
+        follow.image.color = Color.white;
+        hide.image.color = Color.white;
+    }
+
+    public void onHideButton()
+    {
+        companion.StopPath();
+        companion.blackboard.SetValue("target", Vector3.zero);
+        companion.ChangeAction(CompanionAction.HIDE);
+        companion.hiding = true;
+        overwatch.isOn = false;
+        flank.isOn = false;
+        hide.image.color = Color.green;
+        scavenge.image.color = Color.white;
         follow.image.color = Color.white;
     }
 

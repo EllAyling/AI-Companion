@@ -39,6 +39,8 @@ public class ActionGetFollowPosition : BTNode
 
         companion.transform.LookAt(newTarget);
 
+        companion.candidatePositionsForDebug = candidatePositions;
+
         return NodeState.SUCCESS;
     }
 

@@ -189,7 +189,7 @@ public class Entity : MonoBehaviour, IDamagable {
     }
 
 
-    public void OnDrawGizmos()
+    public virtual void OnDrawGizmos()
     {
         Gizmos.DrawRay(transform.position, transform.forward);
         if (path != null)

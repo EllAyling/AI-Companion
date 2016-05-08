@@ -23,13 +23,11 @@ public class ActionCheckFollowPosition : BTNode
         else
         {
             distanceFromPlayer = 20.0f;
+            if (eyes.enemiesInSight.Count > 0)
+            {
+                distanceFromPlayer = 8.0f;
+            }
         }
-
-        if (eyes.enemiesInSight.Count > 0)
-        {
-            distanceFromPlayer = 8.0f;
-        }
-
 
         float distance = Vector3.Distance(companion.transform.position, companion.player.transform.position);
         if (distance > distanceFromPlayer && companion.currentAction == CompanionAction.FOLLOW)

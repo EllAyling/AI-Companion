@@ -12,6 +12,11 @@ public class Player : Entity
 
     public int medKitValue = 2;
 
+    public bool buffed;
+    [HideInInspector] public float buffTimer;
+    public float buffTime = 6.0f;
+    public float buffSpeedBoost;
+
     // Use this for initialization
     public override void Start () {
         base.Start();
@@ -23,6 +28,8 @@ public class Player : Entity
 
         defaultSpeed = playerControls.movementSettings.ForwardSpeed;
 
+        buffed = false;
+        buffTimer = 0.0f;
     }
 	
 	// Update is called once per frame
@@ -57,9 +64,21 @@ public class Player : Entity
         }
 
         Node nodeWalkingOn = grid.NodeFromWorldPoint(transform.position);
-        float speed = defaultSpeed - nodeWalkingOn.movementPenalty;
-        playerControls.movementSettings.ForwardSpeed = speed;
 
+        float addedSpeed = 0.0f;
+        if (buffed)
+        {
+            addedSpeed = buffSpeedBoost;
+            buffTimer += Time.deltaTime;
+            if (buffTimer > buffTime)
+            {
+                buffed = false;
+                buffTimer = 0.0f;
+            }
+        }
+
+        float speed = (defaultSpeed + addedSpeed) - nodeWalkingOn.movementPenalty;
+        playerControls.movementSettings.ForwardSpeed = speed;
     }
 
     void OnTriggerEnter(Collider other)

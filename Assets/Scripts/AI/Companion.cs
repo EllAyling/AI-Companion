@@ -39,12 +39,20 @@ public class Companion : Entity
     private AIBrain brain;
 
     public bool flanking = false;
+    public bool hiding = false;
+    public List<Vector3> safeLocations;
+
+    public List<Vector3> candidatePositionsForDebug;
+    public bool showDebug;
 
     public override void Start()
     {
         base.Start();
         EntityType type = EntityType.Companion;
         AddType(type);
+
+        safeLocations = new List<Vector3>();
+        InvokeRepeating("MarkLocation", 1, 5);
 
         gunController = GetComponent<GunController>();
 
@@ -92,6 +100,7 @@ public class Companion : Entity
                                     new NodeCounter(
                                         new NodeSequencer(new BTNode[]
                                         {
+                                            new ActionReachedTarget(),
                                             new ActionGetHidePosition(),
                                             new ActionRequestPathToTarget()
                                         }), 1
@@ -229,5 +238,42 @@ public class Companion : Entity
     public void ChangeFollowState(FollowState newState)
     {
         FollowState = newState;
+    }
+
+    public void MarkLocation()
+    {
+        if (currentAction != CompanionAction.HIDE)
+        {
+            if (!safeLocations.Contains(transform.position))
+            {
+                safeLocations.Add(transform.position);
+            }
+        }
+    }
+
+    public override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        if (showDebug)
+        {
+            if (candidatePositionsForDebug.Count > 0)
+            {
+                Gizmos.color = Color.blue;
+                foreach (Vector3 position in candidatePositionsForDebug)
+                {
+                    Gizmos.DrawCube(position, Vector3.one);
+                    Gizmos.DrawLine(position, player.transform.position);
+                }
+            }
+
+            if (safeLocations.Count > 0)
+            {
+                foreach (Vector3 position in safeLocations)
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawCube(position, Vector3.one);
+                }
+            }
+        }
     }
 }
