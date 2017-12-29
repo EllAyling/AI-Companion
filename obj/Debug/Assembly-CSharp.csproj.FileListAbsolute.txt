@@ -1,1 +1,0 @@
-D:\AI Companion\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache

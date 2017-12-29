@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Win.unity
-  isLoaded: 1
-  isActive: 1
