@@ -52,7 +52,7 @@ Entity.cs is the parent class which all AI types inherits from. This contains al
 
 If you want even more information, including a YouTube video, and you can read the report I wrote on the project which details mostly everything, including diagrams of the full trees for each AI type here: 
 
-http://elliottayling.co.uk/portfolio/first-person-companion-game/
+http://elliottayling.co.uk/portfolio/items/ai-companion-game/
 
 There is also an implementation of dynamically generated A* pathfinding with heap optimisation under Assets/Scripts/AI/Pathfinding.
 Which is based on this video: https://www.youtube.com/watch?v=3Dw5d7PlcTM
